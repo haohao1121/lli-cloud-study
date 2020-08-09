@@ -1,0 +1,3 @@
+# Project exclude paths
+/lli-cloud-basic/target/
+/lli-cloud-eureka/target/
