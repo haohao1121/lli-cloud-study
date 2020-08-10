@@ -7,9 +7,9 @@
         <groupId>com.sky.lli</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>lli-cloud-basic</artifactId>
-
     <name>lli-cloud-basic</name>
 
     <dependencies>
@@ -27,11 +27,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <!-- Spring Boot Web 依赖 -->
         <dependency>
