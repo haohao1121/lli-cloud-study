@@ -20,11 +20,10 @@ public class TreeBuilder {
 
 
     /**
-     * Date 2019-05-27
-     * Author lihao
-     * 方法说明: 构建树
-     *
      * @param treeNodes 源数据
+     * @date 2019-05-27
+     * @author klaus
+     * 方法说明: 构建树
      */
     public static List<TreeNode> buildTree(List<TreeNode> treeNodes) {
         if (CollectionUtils.isEmpty(treeNodes)) {
@@ -45,13 +44,12 @@ public class TreeBuilder {
     }
 
     /**
-     * Date 2017/10/13
-     * Author lihao [lihao@sinosoft.com.cn]
-     * <p>
-     * 方法说明: 使用递归方法建树
-     *
      * @param treeNodes 传入的树节点列表
      * @param parentId  根节点ID
+     * @date 2017/10/13
+     * @author klaus
+     * <p>
+     * 方法说明: 使用递归方法建树
      */
     public static List<TreeNode> buildTree(List<TreeNode> treeNodes, String parentId) {
         if (CollectionUtils.isEmpty(treeNodes)) {

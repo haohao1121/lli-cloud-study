@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2017/11/20
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class JsonSerializeUtil implements Serializable {
+public final class JsonUtils implements Serializable {
 
     /**
      * 内部私有方法，判断传入是否为null或者字符长度是否为0

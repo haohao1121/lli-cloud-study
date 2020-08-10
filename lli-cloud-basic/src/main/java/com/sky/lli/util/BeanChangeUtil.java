@@ -22,27 +22,25 @@ public class BeanChangeUtil<T> {
 
 
     /**
-     * Date 2019-03-22
-     * Author lihao
-     * 方法说明: 新旧数据差异对比
-     *
      * @param oldBean 原数据
      * @param newBean 新数据
      * @return 差异信息
+     * @date 2019-03-22
+     * @author klaus
+     * 方法说明: 新旧数据差异对比
      */
     public String contrast(Object oldBean, Object newBean) {
         return contrast(oldBean, newBean, new ArrayList<>());
     }
 
     /**
-     * Date 2019-03-22
-     * Author lihao
-     * 方法说明: 新旧数据差异对比
-     *
      * @param oldBean     原数据
      * @param newBean     新数据
      * @param ignorFields 忽略字段
      * @return 差异信息
+     * @date 2019-03-22
+     * @author klaus
+     * 方法说明: 新旧数据差异对比
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     public String contrast(Object oldBean, Object newBean, List<String> ignorFields) {

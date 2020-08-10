@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 描述:
+ * 描述: token拦截器
  *
  * @author klaus
  * @date 2020/8/9

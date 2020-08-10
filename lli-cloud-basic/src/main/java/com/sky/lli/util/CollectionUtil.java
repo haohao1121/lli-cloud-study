@@ -1,6 +1,6 @@
 package com.sky.lli.util;
 
-import com.sky.lli.util.json.JsonSerializeUtil;
+import com.sky.lli.util.json.JsonUtils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
@@ -39,9 +39,8 @@ public class CollectionUtil implements Serializable {
 
     /**
      * 方法说明 : 判断 map 是否为空
-     * <p>
-     * Author lihao [lihao@sinosoft.com.cn]
      *
+     * @author klaus
      * @date 2017/8/3
      */
     public static boolean mapIsNull(Map<?, ?> map) {
@@ -55,8 +54,8 @@ public class CollectionUtil implements Serializable {
      * @param list            要拆分的集合
      * @param maxCountPerList 单个集合中元素数量
      * @return 返回封装拆分后集合的集合
-     * Author lihao [lihao@sinosoft.com.cn]
-     * Date 2017/10/10
+     * @author klaus
+     * @date 2017/10/10
      */
     public static <T> List<List<T>> splitList(List<T> list, int maxCountPerList) {
         if (list == null || list.isEmpty()) {
@@ -89,8 +88,8 @@ public class CollectionUtil implements Serializable {
      * @param collection 传入的集合
      * @param count      限制参数的个数
      * @return 返回封装拆分后集合的集合
-     * Author lihao [lihao@sinosoft.com.cn]
-     * Date 2017/10/10
+     * @author klaus
+     * @date 2017/10/10
      */
     public static <T> List<List<T>> splitList(Collection<T> collection, int count) {
         if (collection == null || collection.isEmpty()) {
@@ -110,8 +109,8 @@ public class CollectionUtil implements Serializable {
      * @param objs  传入的数组
      * @param count 限制参数的个数
      * @return 返回封装拆分后集合的集合
-     * Author lihao [lihao@sinosoft.com.cn]
-     * Date 2017/10/10
+     * @author klaus
+     * @date 2017/10/10
      */
     public static <T> List<List<T>> splitList(T[] objs, int count) {
         if (objs == null || objs.length == 0) {
@@ -131,8 +130,8 @@ public class CollectionUtil implements Serializable {
      * @param map   传入的集合
      * @param count 限制参数的个数
      * @return 返回封装拆分后集合的集合
-     * Author lihao [lihao@sinosoft.com.cn]
-     * Date 2017/10/10
+     * @author klaus
+     * @date 2017/10/10
      */
     public static <K, V> List<Map<K, V>> splitMap(Map<K, V> map, int count) {
         if (map == null || map.size() == 0) {
@@ -153,13 +152,12 @@ public class CollectionUtil implements Serializable {
     }
 
     /**
-     * Date 2017/10/10
-     * Author lihao [lihao@sinosoft.com.cn]
-     * <p>
-     * 方法说明: list深度克隆
-     *
      * @param list 要克隆的数据集合
      * @param <T>  泛型
+     * @date 2017/10/10
+     * @author klaus
+     * <p>
+     * 方法说明: list深度克隆
      */
     @Deprecated
     @SuppressWarnings("unchecked")
@@ -181,32 +179,30 @@ public class CollectionUtil implements Serializable {
     }
 
     /**
-     * Date 2018/9/5
-     * Author lihao
-     * 方法说明: Json序列化深度拷贝List集合
-     *
      * @param list     集合
      * @param classOfT 类型
      * @return 新的集合
+     * @date 2018/9/5
+     * @author klaus
+     * 方法说明: Json序列化深度拷贝List集合
      */
     public static <T> List<T> deepCopyList(List<T> list, Class<T> classOfT) {
         if (!CollectionUtils.isEmpty(list)) {
             //序列化
-            String jsonList = JsonSerializeUtil.toJson(list);
+            String jsonList = JsonUtils.toJson(list);
             //反序列化
-            return JsonSerializeUtil.fromJsonList(jsonList, classOfT);
+            return JsonUtils.fromJsonList(jsonList, classOfT);
         }
         return new ArrayList<>();
     }
 
     /**
-     * Date 2018/1/10
-     * Author lihao [lihao@sinosoft.com.cn]
-     * 方法说明: 删除重复数据,返回新的集合
-     *
      * @param list 集合
      * @param <T>  泛型
      * @return 返回去重后的list集合
+     * @date 2018/1/10
+     * @author klaus
+     * 方法说明: 删除重复数据,返回新的集合
      */
     public static <T> List<T> removeDuplicate(List<T> list) {
         if (CollectionUtils.isEmpty(list)) {
@@ -217,13 +213,12 @@ public class CollectionUtil implements Serializable {
 
 
     /**
-     * Date 2017/1/3
-     * Author lihao [lihao@sinosoft.com]
-     * <p>
-     * 方法说明: 将字符串转换为指定类型的list集合
-     *
      * @param str 要转换的字符串
      * @return 返回转换后的list集合
+     * @date 2017/1/3
+     * @author klaus
+     * <p>
+     * 方法说明: 将字符串转换为指定类型的list集合
      */
     public static List<Integer> getIntegerList(String str) {
         if (StringUtils.isEmpty(str)) {
@@ -233,13 +228,12 @@ public class CollectionUtil implements Serializable {
     }
 
     /**
-     * Date 2017/1/3
-     * Author lihao [lihao@sinosoft.com]
-     * <p>
-     * 方法说明: 将字符串转换为指定类型的list集合
-     *
      * @param str 要转换的字符串
      * @return 返回转换后的list集合
+     * @date 2017/1/3
+     * @author klaus
+     * <p>
+     * 方法说明: 将字符串转换为指定类型的list集合
      */
     public static List<Long> getLongList(String str) {
         if (StringUtils.isEmpty(str)) {
@@ -249,13 +243,12 @@ public class CollectionUtil implements Serializable {
     }
 
     /**
-     * Date 2017/1/3
-     * Author lihao [lihao@sinosoft.com]
-     * <p>
-     * 方法说明: 将字符串转换为指定类型的list集合
-     *
      * @param str 要转换的字符串
      * @return 返回转换后的list集合
+     * @date 2017/1/3
+     * @author klaus
+     * <p>
+     * 方法说明: 将字符串转换为指定类型的list集合
      */
     public static List<String> getStringList(String str) {
         if (StringUtils.isEmpty(str)) {
