@@ -27,7 +27,8 @@ public enum ExceptionEnum implements IExceptionEnum {
     SYS_SERVICE_NOT_FOUND_ERROR("LLI-00008", "不存在此接口"),
     SYS_DATABASE_FAILURE("LLI-00009", "数据库调用失败"),
     SYS_DATABASE_NULL_FAILURE("LLI-00010", "数据不存在"),
-    SYS_DATABASE_FIELD_NOT_EXIST("CPYY-00011", "数据库表字段缺失"),
+    SYS_DATABASE_FIELD_NOT_EXIST("LLI-00011", "数据库表字段缺失"),
+    SYS_REDIS_LOCK_RUNNING_ERROR("LLI-00012", "存在进行中的任务,请稍后再试"),
     SYS_FAILURE_EXCEPTION("LLI-10000", "系统异常");
     //endregion
 
@@ -39,5 +40,4 @@ public enum ExceptionEnum implements IExceptionEnum {
     ExceptionEnum(String code, String message) {
         this.code = code;
         this.message = message;
-    }
-}
+    }}

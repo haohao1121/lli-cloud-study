@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+# 目的：提升docker编译速度
+# 做法：排除所有，包含需要的
+# Reference: https://stackoverflow.com/questions/28097064/dockerignore-ignore-everything-except-a-file-and-the-dockerfile
+
+# Ignore everything
+**
+
+# Allow files and directories
+!target/*.jar
+!Dockerfile
