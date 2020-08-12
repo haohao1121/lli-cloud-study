@@ -83,7 +83,7 @@ public class RedisLock {
     }
 
     /**
-     * 在锁里运行任务
+     * 在锁里运行任务(同步调用)
      *
      * @param key      redis中key
      * @param value    key对应的value
@@ -93,8 +93,7 @@ public class RedisLock {
      *
      * @return callable的运行结果
      */
-    public <T> T runWithLockSync(String key, String value, TimeUnit timeUnit, long timeout, Callable<T> callable)
-                    throws UtilsException {
+    public <T> T runWithLockSync(String key, String value, TimeUnit timeUnit, long timeout, Callable<T> callable) {
         return doRunWithLockSync(key, value, timeUnit, timeout, callable, DEFAULT_LOCK_FAIL_THAN_THROWS);
     }
 
@@ -110,7 +109,7 @@ public class RedisLock {
      * @return callable的运行结果
      */
     private <T> T doRunWithLockSync(String key, String value, TimeUnit timeUnit, long timeout, Callable<T> callable,
-                                    Supplier<UtilsException> lockFailThanThrows) throws UtilsException {
+                                    Supplier<UtilsException> lockFailThanThrows) {
         boolean lock = false;
         try {
             lock = lock(key, value, timeUnit, timeout);
@@ -131,9 +130,29 @@ public class RedisLock {
 
     /**
      * 在锁里运行任务(异步调用)
+     *
+     * @param key                redis中key
+     * @param timeUnit           时间单位
+     * @param timeout            锁持有时间
+     * @param callable           需要锁里运行的任务
+     * @param lockFailThanThrows 加锁失败抛出的异常
+     */
+    public void runWithLockAsync(String key, String value, TimeUnit timeUnit, long timeout, Callable<?> callable,
+                                 Supplier<UtilsException> lockFailThanThrows) {
+        doRunWithLockAsync(key, value, timeUnit, timeout, callable, lockFailThanThrows);
+    }
+
+    /**
+     * 在锁里运行任务(异步调用)
+     *
+     * @param key                redis中key
+     * @param timeUnit           时间单位
+     * @param timeout            锁持有时间
+     * @param callable           需要锁里运行的任务
+     * @param lockFailThanThrows 加锁失败抛出的异常
      */
     private void doRunWithLockAsync(String key, String value, TimeUnit timeUnit, long timeout, Callable<?> callable,
-                                    Supplier<UtilsException> lockFailThanThrows) throws UtilsException {
+                                    Supplier<UtilsException> lockFailThanThrows) {
         try {
             // 加锁
             if (!lock(key, value, timeUnit, timeout)) {
