@@ -12,7 +12,8 @@ spring:
 # eureka相关配置
 eureka:
   instance:
-    hostname: localhost #eureka服务端的实例名称
+    #eureka服务端的实例名称
+    hostname: localhost
   client:
     #false表示不向注册中心注册自己
     register-with-eureka: false
@@ -23,7 +24,6 @@ eureka:
       #defaultZone: http://eureka7002.com:7002/eureka/
       #单机就是自己
       defaultZone: ${EUREKA_SERVER_LIST:http://${eureka.instance.hostname}:${server.port}/eureka/}
-
   server:
     #关闭自我保护机制，保证不可用服务被及时剔除
     enable-self-preservation: false
