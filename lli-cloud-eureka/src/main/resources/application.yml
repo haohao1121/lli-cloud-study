@@ -6,6 +6,8 @@ server:
 spring:
   application:
     name: eureka
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
 
 # eureka相关配置
 eureka:
@@ -17,10 +19,11 @@ eureka:
     #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
     fetch-registry: false
     service-url:
-      #集群指向其它eureka,多个以逗号分割,集群推荐至少三个
+      #集群指向其它eureka,多个以逗号分割,集群推荐至少三个,EUREKA_SERVER_LIST为集群变量
       #defaultZone: http://eureka7002.com:7002/eureka/
       #单机就是自己
-      defaultZone: http://localhost:${server.port}/eureka/
+      defaultZone: ${EUREKA_SERVER_LIST:http://${eureka.instance.hostname}:${server.port}/eureka/}
+
   server:
     #关闭自我保护机制，保证不可用服务被及时剔除
     enable-self-preservation: false

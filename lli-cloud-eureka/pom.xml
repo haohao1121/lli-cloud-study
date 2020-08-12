@@ -14,9 +14,10 @@
 
     <properties>
         <!-- Docker 配置 -->
-        <docker.build.host>http://172.16.41.156:2375</docker.build.host>
-        <docker.registry.host>172.16.41.156:8080</docker.registry.host>
-        <docker.registry.name>library</docker.registry.name>
+        <docker.host.ip>harbor.lli.com</docker.host.ip>
+        <docker.build.host>http://${docker.host.ip}:2375</docker.build.host>
+        <docker.registry.host>${docker.host.ip}:6100</docker.registry.host>
+        <docker.registry.name>myHarbor</docker.registry.name>
         <docker.server.id>docker-harbor</docker.server.id>
     </properties>
 
