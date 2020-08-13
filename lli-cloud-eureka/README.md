@@ -4,13 +4,13 @@
 
 ### Docker 方式启动说明
 
-集群模式高可用一般至少3个节点,本地测试开发可以使用单节点,两个参数   
+集群模式高可用一般至少3个节点,本地测试开发可以使用单节点,目前有两个可以选择的参数   
 
 ###### 1.SPRING_PROFILES_ACTIVE   
-多环境动态指定配置文件,比如 test,uat,prod 等.  
+多环境动态指定配置文件,比如 test,uat,prod 等,默认 local ,即本地开发环境.  
 
 ###### 2.EUREKA_SERVER_LIST  
-service-url,单节点或集群指定,默认 http://localhost:700/eureka/  
+service-url,单节点或集群指定,默认 http://localhost:7001/eureka/  
 如果集群模式,以逗号分割
 
 
