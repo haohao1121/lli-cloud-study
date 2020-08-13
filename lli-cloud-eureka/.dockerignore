@@ -8,4 +8,4 @@
 
 # Allow files and directories
 !target/*.jar
-!Dockerfile
+!docker/Dockerfile

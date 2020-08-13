@@ -85,7 +85,7 @@
                     <registryUrl>${docker.registry.host}</registryUrl>
                     <imageName>${docker.registry.host}/${docker.registry.name}/${project.artifactId}
                     </imageName>
-                    <dockerDirectory>${basedir}/</dockerDirectory>
+                    <dockerDirectory>${project.basedir}/docker</dockerDirectory>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
