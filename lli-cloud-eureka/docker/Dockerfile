@@ -1,4 +1,3 @@
-
 FROM java:8
 ENV TZ=Asia/Shanghai LANG=C.UTF-8
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

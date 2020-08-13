@@ -1,0 +1,42 @@
+version: '3'
+services:
+  eureka1:
+    image: harbor.lli.com:6100/myharbor/lli-cloud-eureka
+    hostname: eureka1
+    networks:
+      lli-cloud:
+        aliases:
+          - eureka
+    ports:
+      - "7001:7001"
+    environment:
+      - EUREKA_SERVER_LIST=http://eureka2:7001/eureka/,http://eureka3:7001/eureka/
+
+  eureka2:
+    image: harbor.lli.com:6100/myharbor/lli-cloud-eureka
+    hostname: eureka2
+    networks:
+      lli-cloud:
+        aliases:
+          - eureka
+    ports:
+      - "7002:7001"
+    environment:
+      - EUREKA_SERVER_LIST=http://eureka1:7001/eureka/,http://eureka3:7001/eureka/
+
+  eureka3:
+    image: harbor.lli.com:6100/myharbor/lli-cloud-eureka
+    hostname: eureka3
+    networks:
+      lli-cloud:
+        aliases:
+          - eureka
+    ports:
+      - "7003:7001"
+    environment:
+      - EUREKA_SERVER_LIST=http://eureka1:7001/eureka/,http://eureka2:7001/eureka/
+
+networks:
+  lli-cloud:
+    external:
+      name: lli-cloud
