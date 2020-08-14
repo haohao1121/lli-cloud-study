@@ -13,9 +13,11 @@ import java.io.IOException;
 
 /**
  * FTP实现的文件下载
+ *
+ * @author lihao
  */
 @Service
-@ConditionalOnProperty(name = "filestorage.type", havingValue = "ftp")
+@ConditionalOnProperty(name = "storage.type", havingValue = "ftp")
 @Slf4j
 public class FTPFileDownload implements IFileDownLoad {
 
@@ -36,17 +38,15 @@ public class FTPFileDownload implements IFileDownLoad {
      *
      * @param filePath FTP中的路径
      * @param uniqueNo FTP中的文件名称
+     *
      * @return 是否下载成功
      */
     @Override
     public boolean downloadFile(String uniqueNo, String filePath) {
         try {
-            FtpHelper.ftpUploaderBuild(
-                    ftpProperties.getHost(),
-                    ftpProperties.getPort(),
-                    ftpProperties.getUserName(),
-                    ftpProperties.getUserPassword())
-                    .download(filePath, uniqueNo, fileStorageProperties.getTempPath());
+            FtpHelper.ftpUploaderBuild(ftpProperties.getHost(), ftpProperties.getPort(), ftpProperties.getUserName(),
+                                       ftpProperties.getUserPassword())
+                            .download(filePath, uniqueNo, fileStorageProperties.getTempPath());
             return true;
         } catch (IOException e) {
             log.error("Ftp下载失败", e);

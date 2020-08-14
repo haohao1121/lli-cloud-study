@@ -1,11 +1,42 @@
-# 端口
 server:
-  port: 7101
-
-# 应用名称
+  port: 8891
 spring:
+  aop:
+    proxy-target-class: true
   application:
-    name: eureka-server
-  # 如果有多环境配置文件,如 application-uat.yml ,此处可以动态指定,默认本地开发 local 环境
-  profiles:
-    active: ${SPRING_PROFILES_ACTIVE:local}
+    name: lli-cloud-ftp
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force-request: true
+  output:
+    ansi:
+      enabled: always
+  data:
+    mongodb:
+      uri: mongodb://vm-1.lli.com:27017/FILE_SERVER
+
+storage:
+  type: ftp
+  download-path: downloadPath/
+  upload-path: uploadPath/
+  preview-path: preview/
+  temp-path: tempPath/
+  video-path: videopath/
+#
+ftp:
+  host: vm-1.lli.com
+  port: 21
+  user-name: ftplli
+  user-password: ftplli
+#oss:
+#  accessKeyId: LTAIAx9GPnernwbD
+#  accessKeySecret: ZibEXmLHrPH3ycyJUUBnNfAbKHspGC
+#  bucketName: demo-standard
+#  comBucketName: lc-public-static
+#  endpoint: http://oss-cn-beijing.aliyuncs.com
+#  publicUrlPrefix: https://lc-public-static.oss-cn-beijing.aliyuncs.com
+
+
+

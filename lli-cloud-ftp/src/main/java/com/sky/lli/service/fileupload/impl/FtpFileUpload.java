@@ -30,7 +30,7 @@ import java.util.Date;
  */
 @Service
 @Slf4j
-@ConditionalOnProperty(name = "filestorage.type", havingValue = "ftp")
+@ConditionalOnProperty(name = "storage.type", havingValue = "ftp")
 public class FtpFileUpload implements IFileUpload {
 
     @Resource

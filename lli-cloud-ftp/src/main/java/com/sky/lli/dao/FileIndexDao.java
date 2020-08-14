@@ -4,7 +4,7 @@ import com.sky.lli.model.FileIndex;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * 说明:
+ * 说明: 文件存储
  *
  * @author klaus
  * @date 2020/8/14

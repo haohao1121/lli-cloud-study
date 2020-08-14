@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -54,7 +53,7 @@ public class FileIndex implements Serializable {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty("修改时间")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     /**
      * 需要保存的附加参数

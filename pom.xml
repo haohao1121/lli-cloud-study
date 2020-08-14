@@ -61,7 +61,7 @@
         <!-- pinyin4j 工具类 -->
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <!-- Swagger 依赖 -->
-        <swagger.version>1.9.1.RELEASE</swagger.version>
+        <knife4j-spring-boot-starter.version>2.0.2</knife4j-spring-boot-starter.version>
 
     </properties>
     <dependencyManagement>
@@ -141,12 +141,13 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-            <!-- Swagger 依赖 -->
+            <!--Swagger 依赖开始-->
             <dependency>
-                <groupId>com.spring4all</groupId>
-                <artifactId>swagger-spring-boot-starter</artifactId>
-                <version>${swagger.version}</version>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j-spring-boot-starter.version}</version>
             </dependency>
+            <!--Swagger 依赖结束-->
             <!-- pinyin4j工具包 -->
             <dependency>
                 <groupId>com.belerweb</groupId>

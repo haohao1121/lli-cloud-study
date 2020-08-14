@@ -4,9 +4,9 @@ import ch.qos.logback.core.util.FileSize;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.DownloadFileRequest;
 import com.aliyun.oss.model.DownloadFileResult;
-import com.sinosoft.cpyy.config.properties.FileStorageProperties;
-import com.sinosoft.cpyy.config.properties.OssProperties;
-import com.sinosoft.cpyy.service.filedownload.IFileDownLoad;
+import com.sky.lli.config.properties.FileStorageProperties;
+import com.sky.lli.config.properties.OssProperties;
+import com.sky.lli.service.filedownload.IFileDownLoad;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,11 @@ import java.io.File;
 
 /**
  * FTP实现的文件下载
+ *
+ * @author lihao
  */
 @Service
-@ConditionalOnProperty(name = "filestorage.type", havingValue = "alioos")
+@ConditionalOnProperty(name = "storage.type", havingValue = "alioos")
 @Slf4j
 public class AliOSSFileDownload implements IFileDownLoad {
 
@@ -44,6 +46,7 @@ public class AliOSSFileDownload implements IFileDownLoad {
      *
      * @param filePath FTP中的路径
      * @param uniqueNo FTP中的文件名称
+     *
      * @return 是否下载成功
      */
     @Override
@@ -57,10 +60,12 @@ public class AliOSSFileDownload implements IFileDownLoad {
      * @param uniqueNo         文件唯一号
      * @param filePath         文件被下载位置
      * @param enableCheckpoint 是否开启断点续传
+     *
      * @return 是否下载成功
      */
     private boolean downloadFromAliOSS(String uniqueNo, String filePath, boolean enableCheckpoint) {
-        OSSClient ossClient = new OSSClient(ossProperties.getEndpoint(), ossProperties.getAccessKeyId(), ossProperties.getAccessKeySecret());
+        OSSClient ossClient = new OSSClient(ossProperties.getEndpoint(), ossProperties.getAccessKeyId(),
+                                            ossProperties.getAccessKeySecret());
         Boolean downloadSuccess = false;
         try {
             //处理下载路径
@@ -72,8 +77,8 @@ public class AliOSSFileDownload implements IFileDownLoad {
             }
             DownloadFileRequest downloadFileRequest;
             if (enableCheckpoint) {
-                downloadFileRequest = new DownloadFileRequest(
-                        ossProperties.getBucketName(), uniqueNo, downloadFile, FileSize.MB_COEFFICIENT, 5, true);
+                downloadFileRequest = new DownloadFileRequest(ossProperties.getBucketName(), uniqueNo, downloadFile,
+                                                              FileSize.MB_COEFFICIENT, 5, true);
             } else {
                 downloadFileRequest = new DownloadFileRequest(ossProperties.getBucketName(), uniqueNo);
                 downloadFileRequest.setDownloadFile(downloadFile);
