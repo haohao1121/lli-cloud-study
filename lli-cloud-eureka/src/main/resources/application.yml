@@ -9,6 +9,11 @@ spring:
   # 如果有多环境配置文件,如 application-uat.yml ,此处可以动态指定,默认本地开发 local 环境
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:local}
+  # 添加安全认证
+  security:
+    user:
+      name: lli
+      password: lli
 
 # eureka相关配置
 eureka:
