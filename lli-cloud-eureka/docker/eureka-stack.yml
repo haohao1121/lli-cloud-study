@@ -11,6 +11,9 @@ services:
       - "7001:7001"
     environment:
       - EUREKA_SERVER_LIST=http://eureka2:7001/eureka/,http://eureka3:7001/eureka/
+      - SPRING_PROFILES_ACTIVE=uat
+      - LOGIN_NAME=lli
+      - LOGIN_PWD=lli
 
   eureka2:
     image: harbor.lli.com:6100/myharbor/lli-cloud-eureka
@@ -23,6 +26,9 @@ services:
       - "7002:7001"
     environment:
       - EUREKA_SERVER_LIST=http://eureka1:7001/eureka/,http://eureka3:7001/eureka/
+      - SPRING_PROFILES_ACTIVE=uat
+      - LOGIN_NAME=lli
+      - LOGIN_PWD=lli
 
   eureka3:
     image: harbor.lli.com:6100/myharbor/lli-cloud-eureka
@@ -35,6 +41,9 @@ services:
       - "7003:7001"
     environment:
       - EUREKA_SERVER_LIST=http://eureka1:7001/eureka/,http://eureka2:7001/eureka/
+      - SPRING_PROFILES_ACTIVE=uat
+      - LOGIN_NAME=lli
+      - LOGIN_PWD=lli
 
 networks:
   lli-cloud:
