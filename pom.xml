@@ -19,7 +19,6 @@
     <modules>
         <module>lli-cloud-basic</module>
         <module>lli-cloud-eureka</module>
-        <module>lli-cloud-ftp</module>
     </modules>
 
 
