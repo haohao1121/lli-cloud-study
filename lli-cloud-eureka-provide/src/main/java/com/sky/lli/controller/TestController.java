@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("provide")
-    public ResponseResult<Object> provide() {
-        log.info("收到消费者发起的请求");
-        return ResultResponseUtils.success();
+    public ResponseResult<Object> provide(String requstName) {
+        log.info("收到消费者发起的请求======{}", requstName);
+        return ResultResponseUtils.success(requstName);
     }
 
 }
