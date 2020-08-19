@@ -19,6 +19,7 @@
     <modules>
         <module>lli-cloud-basic</module>
         <module>lli-cloud-eureka</module>
+        <module>lli-cloud-eureka-provide</module>
     </modules>
 
 

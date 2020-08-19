@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author code-generator
- * @date 2020-01-05
+ * @author lihao (15215401693@163.com)
+ * @date 2020/08/19
  */
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+public class Knife4jSwaggerConfig {
 
     @Bean
     public Docket createRestApi() {
@@ -39,4 +39,5 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("LLI Cloud Study").description("SpringCloud相关学习记录").version("1.0").build();
     }
+
 }
