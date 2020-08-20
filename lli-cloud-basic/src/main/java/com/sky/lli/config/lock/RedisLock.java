@@ -5,6 +5,7 @@ import com.sky.lli.exception.ExceptionEnum;
 import com.sky.lli.exception.UtilsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
@@ -24,6 +25,7 @@ import java.util.function.Supplier;
  */
 @Slf4j
 @Component
+@ConditionalOnProperty(name = "lli.redis.lock.enable", havingValue = "true")
 public class RedisLock {
 
     private final StringRedisTemplate redisTemplate;
