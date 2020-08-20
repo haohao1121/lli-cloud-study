@@ -25,6 +25,12 @@ eureka:
     register-with-eureka: false
     #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
     fetch-registry: false
+    #  Eureka-Client端拉取 Server注册信息的频率,默认30秒
+    registry-fetch-interval-seconds: 10
+    ## InstanceInfoReplicator 将实例信息变更同步到 Eureka Server的初始延迟时间 ，默认为40秒
+    initial-instance-info-replication-interval-seconds: 10
+    ## http 连接超时时间，默认为5秒，这里设置为30秒
+    eureka-server-connect-timeout-seconds: 30
     service-url:
       #集群指向其它eureka,多个以逗号分割,集群推荐至少三个,EUREKA_SERVER_LIST为集群变量
       #defaultZone: http://eureka7002.com:7002/eureka/

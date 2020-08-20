@@ -4,6 +4,8 @@ import com.sky.lli.util.restful.ResponseResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author lihao (15215401693@163.com)
@@ -22,5 +24,6 @@ public interface TestProvideService {
      * @return 数据
      */
     @GetMapping("provide")
-    ResponseResult<Object> provide(String name);
+    @ResponseBody
+    ResponseResult<Object> provide(@RequestParam("requstName") String name);
 }

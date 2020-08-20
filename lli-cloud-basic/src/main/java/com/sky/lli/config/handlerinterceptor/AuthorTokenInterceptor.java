@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Configuration
-@ConditionalOnProperty(name = "lli.feign.auto.token", havingValue = "true")
+@ConditionalOnProperty(name = "lli.feign.auto.token", havingValue = "true", matchIfMissing = true)
 public class AuthorTokenInterceptor implements WebMvcConfigurer {
     private static final String TOKEN = "Token";
 

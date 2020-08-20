@@ -28,7 +28,7 @@ public class Knife4jSwaggerConfig {
     public Docket createRestApi() {
         ParameterBuilder ticketPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<>();
-        ticketPar.name("Authorization").description("token").modelRef(new ModelRef("string")).parameterType("header")
+        ticketPar.name("Token").description("token").modelRef(new ModelRef("string")).parameterType("header")
                         .defaultValue("").required(false).build();
         pars.add(ticketPar.build());
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
