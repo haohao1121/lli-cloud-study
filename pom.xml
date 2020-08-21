@@ -18,6 +18,7 @@
     <!--子模块集合-->
     <modules>
         <module>lli-cloud-basic</module>
+        <module>lli-cloud-utils</module>
         <module>lli-cloud-eureka</module>
         <module>lli-cloud-eureka-provide</module>
         <module>lli-cloud-eureka-consume</module>
@@ -109,7 +110,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
-                <version>${easyexcel.version}</version>
+                <version>${alibaba.easyexcel.version}</version>
             </dependency>
             <!-- Spring Boot Page_helper 分页插件 -->
             <dependency>

@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -14,15 +15,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -35,7 +29,6 @@ import java.util.stream.Collectors;
 public class CollectionUtil implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(CollectionUtil.class);
-
 
     /**
      * 方法说明 : 判断 map 是否为空
@@ -53,7 +46,9 @@ public class CollectionUtil implements Serializable {
      * @param <T>             泛型T
      * @param list            要拆分的集合
      * @param maxCountPerList 单个集合中元素数量
+     *
      * @return 返回封装拆分后集合的集合
+     *
      * @author klaus
      * @date 2017/10/10
      */
@@ -87,7 +82,9 @@ public class CollectionUtil implements Serializable {
      * @param <T>        泛型T
      * @param collection 传入的集合
      * @param count      限制参数的个数
+     *
      * @return 返回封装拆分后集合的集合
+     *
      * @author klaus
      * @date 2017/10/10
      */
@@ -108,7 +105,9 @@ public class CollectionUtil implements Serializable {
      * @param <T>   泛型T
      * @param objs  传入的数组
      * @param count 限制参数的个数
+     *
      * @return 返回封装拆分后集合的集合
+     *
      * @author klaus
      * @date 2017/10/10
      */
@@ -129,7 +128,9 @@ public class CollectionUtil implements Serializable {
      * @param <V>   泛型V
      * @param map   传入的集合
      * @param count 限制参数的个数
+     *
      * @return 返回封装拆分后集合的集合
+     *
      * @author klaus
      * @date 2017/10/10
      */
@@ -154,6 +155,7 @@ public class CollectionUtil implements Serializable {
     /**
      * @param list 要克隆的数据集合
      * @param <T>  泛型
+     *
      * @date 2017/10/10
      * @author klaus
      * <p>
@@ -169,8 +171,7 @@ public class CollectionUtil implements Serializable {
 
             ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
             ObjectInputStream in = new ObjectInputStream(byteIn);
-            @SuppressWarnings("unchecked")
-            List<T> dest = (List<T>) in.readObject();
+            @SuppressWarnings("unchecked") List<T> dest = (List<T>) in.readObject();
             return dest;
         } catch (IOException | ClassNotFoundException e) {
             log.error("list深度克隆出错,错误信息如下:{}", e.getMessage());
@@ -181,7 +182,9 @@ public class CollectionUtil implements Serializable {
     /**
      * @param list     集合
      * @param classOfT 类型
+     *
      * @return 新的集合
+     *
      * @date 2018/9/5
      * @author klaus
      * 方法说明: Json序列化深度拷贝List集合
@@ -199,7 +202,9 @@ public class CollectionUtil implements Serializable {
     /**
      * @param list 集合
      * @param <T>  泛型
+     *
      * @return 返回去重后的list集合
+     *
      * @date 2018/1/10
      * @author klaus
      * 方法说明: 删除重复数据,返回新的集合
@@ -211,10 +216,11 @@ public class CollectionUtil implements Serializable {
         return new ArrayList<>(new HashSet<>(list));
     }
 
-
     /**
      * @param str 要转换的字符串
+     *
      * @return 返回转换后的list集合
+     *
      * @date 2017/1/3
      * @author klaus
      * <p>
@@ -229,7 +235,9 @@ public class CollectionUtil implements Serializable {
 
     /**
      * @param str 要转换的字符串
+     *
      * @return 返回转换后的list集合
+     *
      * @date 2017/1/3
      * @author klaus
      * <p>
@@ -244,7 +252,9 @@ public class CollectionUtil implements Serializable {
 
     /**
      * @param str 要转换的字符串
+     *
      * @return 返回转换后的list集合
+     *
      * @date 2017/1/3
      * @author klaus
      * <p>
@@ -255,6 +265,53 @@ public class CollectionUtil implements Serializable {
             return new ArrayList<>();
         }
         return Arrays.asList(str.split(","));
+    }
+
+    /**
+     * 构建List dto转换为vo
+     *
+     * @param data  service 返回的dto集合
+     * @param clazz 返出VO class
+     */
+    public static <T> List<T> builderList(List<?> data, Class<T> clazz) {
+        if (!CollectionUtils.isEmpty(data)) {
+            if (clazz != null) {
+                int size = data.size();
+                List<T> voList = new ArrayList<>(size + (size / 2));
+                data.forEach(item -> {
+                    try {
+                        T o = clazz.newInstance();
+                        BeanUtils.copyProperties(item, o);
+                        voList.add(o);
+                    } catch (Exception e) {
+                        log.error("执行对象Copy出现错误" + e.getMessage(), e);
+                    }
+                });
+                return voList;
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    /**
+     * 构建Object dto转换为vo
+     *
+     * @param data  service 返回的dto对象
+     * @param clazz 返出VO class
+     */
+    public static <T> T builderObject(Object data, Class<T> clazz) {
+        if (data != null) {
+            if (clazz != null) {
+                try {
+                    T o = clazz.newInstance();
+                    BeanUtils.copyProperties(data, o);
+                    return o;
+                } catch (Exception e) {
+                    log.error("执行对象Copy出现错误" + e.getMessage(), e);
+                }
+            }
+        }
+        return null;
     }
 
 }

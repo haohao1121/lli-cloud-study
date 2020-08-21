@@ -1,8 +1,8 @@
-package com.sky.lli.config.lock;
+package com.sky.lli.utils.lock;
 
-import com.sky.lli.config.thread.NativeAsyncTaskExecutePool;
-import com.sky.lli.exception.ExceptionEnum;
-import com.sky.lli.exception.UtilsException;
+import com.sky.lli.utils.exception.ExceptionEnum;
+import com.sky.lli.utils.exception.UtilsException;
+import com.sky.lli.utils.thread.NativeAsyncTaskExecutePool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

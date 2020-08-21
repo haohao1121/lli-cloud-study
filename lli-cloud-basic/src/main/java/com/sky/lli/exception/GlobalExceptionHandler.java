@@ -3,7 +3,6 @@ package com.sky.lli.exception;
 import com.sky.lli.util.restful.ResponseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -32,6 +31,7 @@ public class GlobalExceptionHandler {
      * 本方法处理 Exception 抛出异常的情况
      *
      * @param e 传递的最顶级的异常
+     *
      * @return 返回响应
      */
     @ExceptionHandler(Exception.class)
@@ -61,10 +61,6 @@ public class GlobalExceptionHandler {
         //数据库表字段缺失
         if (e instanceof SQLSyntaxErrorException) {
             return error(ExceptionEnum.SYS_DATABASE_FIELD_NOT_EXIST);
-        }
-        //数据库调用失败
-        if (e instanceof DataAccessException) {
-            return error(ExceptionEnum.SYS_DATABASE_FAILURE);
         }
 
         //最终返回
