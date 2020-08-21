@@ -20,6 +20,7 @@
         <module>lli-cloud-basic</module>
         <module>lli-cloud-utils</module>
         <module>lli-cloud-eureka</module>
+        <module>lli-cloud-fastdfs</module>
         <module>lli-cloud-eureka-provide</module>
         <module>lli-cloud-eureka-consume</module>
     </modules>
@@ -65,7 +66,7 @@
         <!-- Swagger 依赖 -->
         <knife4j-spring-boot-starter.version>2.0.2</knife4j-spring-boot-starter.version>
         <!-- fastdfs 依赖 -->
-        <fastdfs-spring-boot-starter.version>0.1.0</fastdfs-spring-boot-starter.version>
+        <fastdfs-spring-boot-starter.version>0.2.0</fastdfs-spring-boot-starter.version>
 
     </properties>
     <dependencyManagement>

@@ -1,0 +1,13 @@
+# 端口
+server:
+  port: 8010
+# 应用名称
+spring:
+  application:
+    name: lli-cloud-fastdfs
+# FastDFS 相关配置
+fdfs:
+  connect-timeout: 2000
+  so-timeout: 3000
+  tracker-list:
+    - 192.168.199.101:22122

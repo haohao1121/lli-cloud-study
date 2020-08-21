@@ -1,0 +1,7 @@
+# 端口
+server:
+  port: 8020
+# 应用名称
+spring:
+  application:
+    name: lli-cloud-utils
