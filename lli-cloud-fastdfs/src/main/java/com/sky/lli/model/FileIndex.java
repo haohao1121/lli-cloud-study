@@ -26,6 +26,9 @@ public class FileIndex {
     @ApiModelProperty(value = "文件类型")
     private String fileType;
 
+    @ApiModelProperty(value = "文件大小")
+    private String fileSize;
+
     @ApiModelProperty(value = "文件路径")
     private String filePath;
 
