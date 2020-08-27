@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 
 @Data
-@Document(collation = "FILE_INDEX")
+@Document("FILE_INDEX")
 public class FileIndex {
 
     @Id

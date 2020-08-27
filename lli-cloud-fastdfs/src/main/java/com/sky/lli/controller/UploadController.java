@@ -4,6 +4,8 @@ import cn.hutool.core.util.IdUtil;
 import com.luhuiguo.fastdfs.domain.MetaData;
 import com.luhuiguo.fastdfs.domain.StorePath;
 import com.luhuiguo.fastdfs.service.FastFileStorageClient;
+import com.sky.lli.exception.ControllerException;
+import com.sky.lli.exception.ExceptionEnum;
 import com.sky.lli.model.FileIndex;
 import com.sky.lli.service.FileIndexService;
 import com.sky.lli.util.json.JsonUtils;
@@ -128,8 +130,8 @@ public class UploadController {
             if (null != fileIndex) {
                 this.fileIndexService.deleteById(fileIndex.getUniqNo());
             }
+            throw new ControllerException(ExceptionEnum.SYS_INVOKING_ERROR);
         }
-        return fileIndex;
     }
 
     /**
