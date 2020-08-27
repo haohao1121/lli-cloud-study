@@ -1,6 +1,6 @@
 package com.sky.lli.controller;
 
-import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
 import com.luhuiguo.fastdfs.domain.MetaData;
 import com.luhuiguo.fastdfs.domain.StorePath;
 import com.luhuiguo.fastdfs.service.FastFileStorageClient;
@@ -58,7 +58,6 @@ public class DownloadController {
      *
      * @param uniqNo   文件唯一号
      * @param response response
-     *
      * @date 2020-08-27
      * @author lihao
      */
@@ -83,7 +82,6 @@ public class DownloadController {
      *
      * @param filePath 文件全路径
      * @param response response
-     *
      * @date 2020-08-27
      * @author lihao
      */
@@ -99,20 +97,15 @@ public class DownloadController {
 
     /**
      * 方法说明: 根据文件路径已流方式下载文件
+     * nginx反向代理增加请求头Content-disposition及attachment
+     * add_header Content-Disposition "attachment;filename=$arg_attname";
      *
      * @param fileUrl  文件全路径
      * @param response response
-     *
      * @date 2020-08-27
      * @author lihao
      */
     private void download(String fileUrl, HttpServletResponse response) {
-
-        /*
-         * 方法说明:
-         * nginx反向代理增加请求头Content-disposition及attachment
-         * add_header Content-Disposition "attachment;filename=$arg_attname";
-         */
 
         try {
             //获取文件group和path信息
@@ -121,9 +114,9 @@ public class DownloadController {
             byte[] data = this.fastFileStorageClient.downloadFile(storePath.getGroup(), storePath.getPath());
             //获取文件名称
             Set<MetaData> metadataSet = this.fastFileStorageClient
-                            .getMetadata(storePath.getGroup(), storePath.getPath());
+                    .getMetadata(storePath.getGroup(), storePath.getPath());
             String fileName = "undefined";
-            if (CollectionUtil.isNotEmpty(metadataSet)) {
+            if (CollUtil.isNotEmpty(metadataSet)) {
                 for (MetaData metaData : metadataSet) {
                     if ("fileName".equalsIgnoreCase(metaData.getName())) {
                         fileName = metaData.getValue();
@@ -147,7 +140,6 @@ public class DownloadController {
      * 方法说明: 文件下载到指定路径
      *
      * @param fileIndex 文件信息
-     *
      * @date 2020-08-27
      * @author lihao
      */

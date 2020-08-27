@@ -42,6 +42,11 @@ import java.util.stream.Collectors;
 public class UploadController {
 
     /**
+     * FastDFS 服务器地址
+     */
+    private static final String SERVER_URL_PREFIX = "http://fastdfs.lli.com:8888";
+
+    /**
      * 单个文件上传
      */
     private static final String UPLOAD = "upload";
@@ -61,9 +66,7 @@ public class UploadController {
      * 方法说明: 单个文件上传
      *
      * @param file 文件
-     *
      * @return 文件信息
-     *
      * @date 2020/8/22
      * @author klaus
      */
@@ -79,9 +82,7 @@ public class UploadController {
      * 方法说明: 批量文件上传
      *
      * @param files 文件
-     *
      * @return 文件信息
-     *
      * @date 2020/8/22
      * @author klaus
      */
@@ -98,9 +99,7 @@ public class UploadController {
      * 描述: 文件上传方法+MongoDB保存
      *
      * @param file 文件信息
-     *
      * @return 文件信息
-     *
      * @date 2020/8/23
      * @author klaus
      */
@@ -115,7 +114,7 @@ public class UploadController {
             String suffix = FilenameUtils.getExtension(file.getOriginalFilename());
             // 上传文件
             StorePath storePath = this.fastFileStorageClient
-                            .uploadFile(file.getInputStream(), file.getSize(), suffix, metaDataSet);
+                    .uploadFile(file.getInputStream(), file.getSize(), suffix, metaDataSet);
 
             //保存数据信息
             fileIndex = buildFileIndex(file, storePath);
@@ -139,9 +138,7 @@ public class UploadController {
      *
      * @param file      文件
      * @param storePath 文件上传后的信息
-     *
      * @return 文件信息
-     *
      * @date 2020/8/22
      * @author klaus
      */
@@ -156,7 +153,9 @@ public class UploadController {
         fileIndex.setFullPath(storePath.getFullPath());
         fileIndex.setCreateTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
         //文件下载URL
+        fileIndex.setDownloadUrl(SERVER_URL_PREFIX + "/" + storePath.getFullPath());
         //文件来源
+
         return fileIndex;
     }
 
@@ -176,9 +175,7 @@ public class UploadController {
      * 方法说明: 判断文件大小,B,KB,MB,GB
      *
      * @param size 文件字节大小
-     *
      * @return 返回转换后的文件大小
-     *
      * @date 2020-08-24
      * @author lihao
      */
