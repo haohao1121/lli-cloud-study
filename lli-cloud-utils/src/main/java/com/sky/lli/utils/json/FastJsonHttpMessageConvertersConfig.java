@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2020, Cardinal Operations and/or its affiliates. All rights reserved.
- * CARDINAL OPERATIONS PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
-
 package com.sky.lli.utils.json;
 
 import com.alibaba.fastjson.JSON;
@@ -26,8 +21,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 public class FastJsonHttpMessageConvertersConfig {
     /**
      * JSON转换器
-     *
-     * @return
      */
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {

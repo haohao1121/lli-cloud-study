@@ -167,7 +167,7 @@ public class UploadController {
     private Set<MetaData> createMetaData(MultipartFile file) {
         Set<MetaData> metaDataSet = new HashSet<>();
         metaDataSet.add(new MetaData("Author", "lli"));
-        metaDataSet.add(new MetaData("fileName", FilenameUtils.getExtension(file.getOriginalFilename())));
+        metaDataSet.add(new MetaData("fileName", file.getOriginalFilename()));
         return metaDataSet;
     }
 

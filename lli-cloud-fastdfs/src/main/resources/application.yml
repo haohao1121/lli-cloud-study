@@ -7,8 +7,8 @@ spring:
     name: lli-cloud-fastdfs
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 100MB
+      max-request-size: 100MB
 
   # MongoDB配置
   data:
