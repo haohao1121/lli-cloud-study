@@ -29,11 +29,11 @@ public class FileIndex {
     @ApiModelProperty(value = "文件大小")
     private String fileSize;
 
+    @ApiModelProperty(value = "文件组")
+    private String fileGroup;
+
     @ApiModelProperty(value = "文件路径")
     private String filePath;
-
-    @ApiModelProperty(value = "文件完整路径")
-    private String fullPath;
 
     @ApiModelProperty(value = "文件下载地址(Nginx服务地址)")
     private String downloadUrl;
@@ -41,6 +41,6 @@ public class FileIndex {
     @ApiModelProperty(value = "上传时间")
     private String createTime;
 
-    @ApiModelProperty(value = "文件来源(来自Cloud服务中哪个项目)")
+    @ApiModelProperty(value = "文件来源(来自微服务中哪个项目)")
     private String fileSource;
 }

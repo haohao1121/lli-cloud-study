@@ -1,6 +1,5 @@
 package com.sky.lli.controller;
 
-import com.luhuiguo.fastdfs.domain.StorePath;
 import com.luhuiguo.fastdfs.service.FastFileStorageClient;
 import com.sky.lli.exception.ControllerException;
 import com.sky.lli.exception.ExceptionEnum;
@@ -64,9 +63,7 @@ public class DownloadController {
     }
 
     /**
-     * 方法说明: 根据文件路径已流方式下载文件
-     * nginx反向代理增加请求头Content-disposition及attachment
-     * add_header Content-Disposition "attachment;filename=$arg_attname";
+     * 方法说明: 二进制流方式下载文件
      *
      * @param fileIndex 文件信息
      * @param response  response
@@ -77,10 +74,8 @@ public class DownloadController {
     private void download(FileIndex fileIndex, HttpServletResponse response) {
 
         try {
-            //获取文件group和path信息
-            StorePath storePath = StorePath.praseFromUrl(fileIndex.getFullPath());
-            //从服务器获取文件
-            byte[] data = this.fastFileStorageClient.downloadFile(storePath.getGroup(), storePath.getPath());
+            //根据组名和路径,从服务器获取文件
+            byte[] data = this.fastFileStorageClient.downloadFile(fileIndex.getFileGroup(), fileIndex.getFilePath());
 
             response.setCharacterEncoding("UTF-8");
             response.setHeader("Content-disposition",

@@ -95,18 +95,20 @@ public class FileIndexServiceImpl implements FileIndexService {
     private Example<FileIndex> buildExample(FileIndex param) {
         //创建匹配器，即如何使用查询条件
         ExampleMatcher matcher = ExampleMatcher.matching()
-                //改变默认字符串匹配方式：模糊查询
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
-                //改变默认大小写忽略方式：忽略大小写
-                .withIgnoreCase(true)
-                //fileName 采用“包含匹配”的方式查询
-                .withMatcher("fileName", ExampleMatcher.GenericPropertyMatchers.contains())
-                //fileType 采用“精准匹配”的方式查询
-                .withMatcher("fileType", ExampleMatcher.GenericPropertyMatchers.exact())
-                //fileSource 采用“精准匹配”的方式查询
-                .withMatcher("fileSource", ExampleMatcher.GenericPropertyMatchers.exact())
-                //忽略属性，不参与查询
-                .withIgnorePaths("downloadUrl");
+                        //改变默认字符串匹配方式：模糊查询
+                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                        //改变默认大小写忽略方式：忽略大小写
+                        .withIgnoreCase(true)
+                        //fileName 采用“包含匹配”的方式查询
+                        .withMatcher("fileName", ExampleMatcher.GenericPropertyMatchers.contains())
+                        //fileType 采用“精准匹配”的方式查询
+                        .withMatcher("fileGroup", ExampleMatcher.GenericPropertyMatchers.exact())
+                        //fileType 采用“精准匹配”的方式查询
+                        .withMatcher("fileType", ExampleMatcher.GenericPropertyMatchers.exact())
+                        //fileSource 采用“精准匹配”的方式查询
+                        .withMatcher("fileSource", ExampleMatcher.GenericPropertyMatchers.exact())
+                        //忽略属性，不参与查询
+                        .withIgnorePaths("downloadUrl");
 
         return Example.of(param, matcher);
     }

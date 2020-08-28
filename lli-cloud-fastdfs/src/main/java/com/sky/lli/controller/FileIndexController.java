@@ -80,8 +80,8 @@ public class FileIndexController {
         //先获取文件信息
         FileIndex fileIndex = this.fileIndexService.findFileByUniqNo(uniqNo);
         if (null != fileIndex) {
-            log.info(" delete file by path :{}", fileIndex.getFullPath());
-            this.fastFileStorageClient.deleteFile(fileIndex.getFullPath());
+            log.info(" delete file in group:[{}], path :[{}]", fileIndex.getFileGroup(), fileIndex.getFilePath());
+            this.fastFileStorageClient.deleteFile(fileIndex.getFileGroup(), fileIndex.getFilePath());
 
             log.info(" delete mongodb fileIndex by uniqNo :{}", uniqNo);
             this.fileIndexService.deleteById(uniqNo);

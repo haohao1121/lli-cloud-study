@@ -149,8 +149,8 @@ public class UploadController {
         fileIndex.setFileName(file.getOriginalFilename());
         fileIndex.setFileType(FilenameUtils.getExtension(file.getOriginalFilename()));
         fileIndex.setFileSize(checkFileSize(file.getSize()));
+        fileIndex.setFileGroup(storePath.getGroup());
         fileIndex.setFilePath(storePath.getPath());
-        fileIndex.setFullPath(storePath.getFullPath());
         fileIndex.setCreateTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
         //文件下载URL
         fileIndex.setDownloadUrl(SERVER_URL_PREFIX + "/" + storePath.getFullPath());
