@@ -13,10 +13,16 @@ spring:
   # MongoDB配置
   data:
     mongodb:
-      uri: mongodb://vm-1.lli.com:27017/file-index
+      uri: mongodb://t420.lli.com:27017/file-index
+
+# logging日志
+logging:
+  level:
+    org.springframework.data.mongodb.core: DEBUG
+
 # FastDFS 相关配置
 fdfs:
   connect-timeout: 2000
   so-timeout: 3000
   tracker-list:
-    - vm-1.lli.com:22122
+    - huashuo.lli.com:22122
