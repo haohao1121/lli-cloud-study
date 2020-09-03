@@ -19,10 +19,11 @@
     <modules>
         <module>lli-cloud-basic</module>
         <module>lli-cloud-utils</module>
-        <module>lli-cloud-eureka</module>
         <module>lli-cloud-fastdfs</module>
+        <module>lli-cloud-eureka</module>
         <module>lli-cloud-eureka-provide</module>
         <module>lli-cloud-eureka-consume</module>
+        <module>lli-cloud-consul</module>
     </modules>
 
 
