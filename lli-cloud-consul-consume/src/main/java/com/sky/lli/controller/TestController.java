@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 
 /**
  * @author lihao (15215401693@163.com)
- * @date 2020/08/19
+ * @date 2020/09/04
  */
 
 @Slf4j
@@ -20,15 +20,9 @@ public class TestController {
     @Resource
     private TestFeignService testFeignService;
 
-    /**
-     * 方法说明: 测试方法
-     *
-     * @return 测试数据
-     */
-    @GetMapping("consume")
-    public ResponseResult<Object> consume() {
-        log.info("消费者发起的请求");
-
-        return testFeignService.provide("testFeinClient");
+    @GetMapping("/consume")
+    ResponseResult<Object> consume() {
+        log.info(" 发起请求");
+        return this.testFeignService.provide();
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Component
 @FeignClient(value = "LLI-CLOUD-EUREKA-PROVIDE")
-public interface TestProvideService {
+public interface TestFeignService {
 
     /**
      * 方法说明: 测试FeignClient

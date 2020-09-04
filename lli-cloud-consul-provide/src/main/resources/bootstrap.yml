@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        prefer-ip-address: true
+      host: vm-1.lli.com
+      port: 8500
+      config:
+        enabled: true
+        format: yaml
+        data-key: data
+        prefix: config
+        default-context: application

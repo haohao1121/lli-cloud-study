@@ -1,0 +1,5 @@
+server:
+  port: 8520
+spring:
+  application:
+    name: lli-cloud-consul-consume

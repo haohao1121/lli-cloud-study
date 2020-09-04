@@ -24,6 +24,8 @@
         <module>lli-cloud-eureka-provide</module>
         <module>lli-cloud-eureka-consume</module>
         <module>lli-cloud-consul</module>
+        <module>lli-cloud-consul-provide</module>
+        <module>lli-cloud-consul-consume</module>
     </modules>
 
 
