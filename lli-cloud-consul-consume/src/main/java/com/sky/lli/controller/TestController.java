@@ -21,7 +21,7 @@ public class TestController {
     private TestFeignService testFeignService;
 
     @GetMapping("/consume")
-    ResponseResult<Object> consume() {
+    public ResponseResult<Object> consume() {
         log.info(" 发起请求");
         return this.testFeignService.provide();
     }

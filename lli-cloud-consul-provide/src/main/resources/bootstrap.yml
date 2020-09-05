@@ -4,7 +4,7 @@ spring:
       discovery:
         service-name: ${spring.application.name}
         prefer-ip-address: true
-      host: vm-1.lli.com
+      host: t420.lli.com
       port: 8500
       config:
         enabled: true
