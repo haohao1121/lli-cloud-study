@@ -11,4 +11,4 @@ spring:
         format: yaml
         data-key: data
         prefix: config
-        default-context: application
+        default-context: lli-cloud-consul-provide
