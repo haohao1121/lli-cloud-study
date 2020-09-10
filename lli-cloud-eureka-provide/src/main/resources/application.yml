@@ -1,13 +1,8 @@
 server:
   port: 7101
 spring:
-  aop:
-    proxy-target-class: true
   application:
     name: lli-cloud-eureka-provide
-  output:
-    ansi:
-      enabled: always
 
 eureka:
   client:
