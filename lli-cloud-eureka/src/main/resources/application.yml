@@ -41,3 +41,12 @@ eureka:
     enable-self-preservation: false
     # 清理无效节点
     eviction-interval-timer-in-ms: 30000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
