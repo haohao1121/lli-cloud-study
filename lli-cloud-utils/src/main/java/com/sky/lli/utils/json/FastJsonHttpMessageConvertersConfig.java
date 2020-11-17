@@ -31,7 +31,6 @@ public class FastJsonHttpMessageConvertersConfig {
                                              SerializerFeature.WriteNullListAsEmpty,
                                              SerializerFeature.DisableCircularReferenceDetect);
         fastConverter.setFastJsonConfig(fastJsonConfig);
-        HttpMessageConverter<?> converter = fastConverter;
-        return new HttpMessageConverters(converter);
+        return new HttpMessageConverters((HttpMessageConverter<?>) fastConverter);
     }
 }

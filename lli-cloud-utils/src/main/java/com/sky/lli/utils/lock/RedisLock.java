@@ -40,7 +40,7 @@ public class RedisLock {
     /**
      * 锁前缀
      */
-    private static final String REDIS_LOCK_PREFIX = "redis_lock_";
+    private static final String REDIS_LOCK_PREFIX = "redis_lock:";
     /**
      * 加锁默认抛出该异常
      */
