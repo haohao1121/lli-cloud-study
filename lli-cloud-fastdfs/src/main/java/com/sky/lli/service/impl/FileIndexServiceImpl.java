@@ -101,7 +101,7 @@ public class FileIndexServiceImpl implements FileIndexService {
                         .withIgnoreCase(true)
                         //fileName 采用“包含匹配”的方式查询
                         .withMatcher("fileName", ExampleMatcher.GenericPropertyMatchers.contains())
-                        //fileType 采用“精准匹配”的方式查询
+                        //fileGroup 采用“精准匹配”的方式查询
                         .withMatcher("fileGroup", ExampleMatcher.GenericPropertyMatchers.exact())
                         //fileType 采用“精准匹配”的方式查询
                         .withMatcher("fileType", ExampleMatcher.GenericPropertyMatchers.exact())
