@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,9 +14,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 /**
  * 描述: 集合工具类
@@ -197,74 +201,6 @@ public class CollectionUtil implements Serializable {
             return JsonUtils.fromJsonList(jsonList, classOfT);
         }
         return new ArrayList<>();
-    }
-
-    /**
-     * @param list 集合
-     * @param <T>  泛型
-     *
-     * @return 返回去重后的list集合
-     *
-     * @date 2018/1/10
-     * @author klaus
-     * 方法说明: 删除重复数据,返回新的集合
-     */
-    public static <T> List<T> removeDuplicate(List<T> list) {
-        if (CollectionUtils.isEmpty(list)) {
-            return new ArrayList<>();
-        }
-        return new ArrayList<>(new HashSet<>(list));
-    }
-
-    /**
-     * @param str 要转换的字符串
-     *
-     * @return 返回转换后的list集合
-     *
-     * @date 2017/1/3
-     * @author klaus
-     * <p>
-     * 方法说明: 将字符串转换为指定类型的list集合
-     */
-    public static List<Integer> getIntegerList(String str) {
-        if (StringUtils.isEmpty(str)) {
-            return new ArrayList<>();
-        }
-        return Arrays.stream(str.split(",")).map(Integer::parseInt).collect(Collectors.toList());
-    }
-
-    /**
-     * @param str 要转换的字符串
-     *
-     * @return 返回转换后的list集合
-     *
-     * @date 2017/1/3
-     * @author klaus
-     * <p>
-     * 方法说明: 将字符串转换为指定类型的list集合
-     */
-    public static List<Long> getLongList(String str) {
-        if (StringUtils.isEmpty(str)) {
-            return new ArrayList<>();
-        }
-        return Arrays.stream(str.split(",")).map(Long::parseLong).collect(Collectors.toList());
-    }
-
-    /**
-     * @param str 要转换的字符串
-     *
-     * @return 返回转换后的list集合
-     *
-     * @date 2017/1/3
-     * @author klaus
-     * <p>
-     * 方法说明: 将字符串转换为指定类型的list集合
-     */
-    public static List<String> getStringList(String str) {
-        if (StringUtils.isEmpty(str)) {
-            return new ArrayList<>();
-        }
-        return Arrays.asList(str.split(","));
     }
 
     /**
