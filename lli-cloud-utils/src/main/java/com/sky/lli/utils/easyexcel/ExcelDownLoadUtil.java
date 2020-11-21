@@ -3,6 +3,8 @@ package com.sky.lli.utils.easyexcel;
 import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
 import com.alibaba.fastjson.JSON;
 import com.sky.lli.utils.exception.ExceptionEnum;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +25,7 @@ import java.util.function.Supplier;
  * @date 2020/06/19
  */
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public abstract class ExcelDownLoadUtil {
 
     public static void prepare(HttpServletResponse response, String filename) {
@@ -35,7 +38,8 @@ public abstract class ExcelDownLoadUtil {
             } else {
                 filename = URLEncoder.encode(filename, StandardCharsets.UTF_8.toString());
             }
-        } catch (UnsupportedEncodingException ignore) {
+        } catch (UnsupportedEncodingException e) {
+            log.error("文件编码错误", e);
         }
         response.setHeader("Content-disposition", "attachment;filename=" + filename + ".xlsx");
     }
@@ -63,7 +67,7 @@ public abstract class ExcelDownLoadUtil {
 
     public static void write(HttpServletResponse response, ExcelWriterSheetBuilder builder, String filename,
                              Supplier<List<List<String>>> headTitleSupplier, Supplier<List<?>> excelDataSupplier)
-                    throws IOException {
+            throws IOException {
         try {
             ExcelDownLoadUtil.prepare(response, filename);
             builder.head(headTitleSupplier.get());
@@ -83,6 +87,6 @@ public abstract class ExcelDownLoadUtil {
     }
 
     public static List<List<String>> simpleHeadTitle(List<String> headTitle) {
-        return simpleHeadTitle(headTitle.toArray(new String[] {}));
+        return simpleHeadTitle(headTitle.toArray(new String[]{}));
     }
 }

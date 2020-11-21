@@ -1,5 +1,6 @@
 package com.sky.lli.config.handlerinterceptor;
 
+import com.sky.lli.util.MultipartFileUtils;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
 import org.springframework.beans.factory.ObjectFactory;
@@ -26,7 +27,7 @@ import org.springframework.context.annotation.Scope;
  * .APPLICATION_JSON_UTF8_VALUE)
  * Resp<?> upload(@RequestPart("file") MultipartFile file);
  * }
- * 场景二: 借助 {@link com.sky.lli.util.FeignMultipartUtils} 将文件转化为 MultipartFile
+ * 场景二: 借助 {@link MultipartFileUtils} 将文件转化为 MultipartFile
  *
  * @author lihao (15215401693@163.com)
  * @date 2020/08/28

@@ -50,9 +50,7 @@ public class CollectionUtil implements Serializable {
      * @param <T>             泛型T
      * @param list            要拆分的集合
      * @param maxCountPerList 单个集合中元素数量
-     *
      * @return 返回封装拆分后集合的集合
-     *
      * @author klaus
      * @date 2017/10/10
      */
@@ -86,9 +84,7 @@ public class CollectionUtil implements Serializable {
      * @param <T>        泛型T
      * @param collection 传入的集合
      * @param count      限制参数的个数
-     *
      * @return 返回封装拆分后集合的集合
-     *
      * @author klaus
      * @date 2017/10/10
      */
@@ -109,9 +105,7 @@ public class CollectionUtil implements Serializable {
      * @param <T>   泛型T
      * @param objs  传入的数组
      * @param count 限制参数的个数
-     *
      * @return 返回封装拆分后集合的集合
-     *
      * @author klaus
      * @date 2017/10/10
      */
@@ -132,9 +126,7 @@ public class CollectionUtil implements Serializable {
      * @param <V>   泛型V
      * @param map   传入的集合
      * @param count 限制参数的个数
-     *
      * @return 返回封装拆分后集合的集合
-     *
      * @author klaus
      * @date 2017/10/10
      */
@@ -159,13 +151,10 @@ public class CollectionUtil implements Serializable {
     /**
      * @param list 要克隆的数据集合
      * @param <T>  泛型
-     *
      * @date 2017/10/10
      * @author klaus
-     * <p>
      * 方法说明: list深度克隆
      */
-    @Deprecated
     @SuppressWarnings("unchecked")
     public static <T> List<T> deepCopy(List<T> list) {
         try {
@@ -186,14 +175,12 @@ public class CollectionUtil implements Serializable {
     /**
      * @param list     集合
      * @param classOfT 类型
-     *
      * @return 新的集合
-     *
      * @date 2018/9/5
      * @author klaus
      * 方法说明: Json序列化深度拷贝List集合
      */
-    public static <T> List<T> deepCopyList(List<T> list, Class<T> classOfT) {
+    public static <T> List<T> deepCopy(List<T> list, Class<T> classOfT) {
         if (!CollectionUtils.isEmpty(list)) {
             //序列化
             String jsonList = JsonUtils.toJson(list);
@@ -210,21 +197,19 @@ public class CollectionUtil implements Serializable {
      * @param clazz 返出VO class
      */
     public static <T> List<T> builderList(List<?> data, Class<T> clazz) {
-        if (!CollectionUtils.isEmpty(data)) {
-            if (clazz != null) {
-                int size = data.size();
-                List<T> voList = new ArrayList<>(size + (size / 2));
-                data.forEach(item -> {
-                    try {
-                        T o = clazz.newInstance();
-                        BeanUtils.copyProperties(item, o);
-                        voList.add(o);
-                    } catch (Exception e) {
-                        log.error("执行对象Copy出现错误" + e.getMessage(), e);
-                    }
-                });
-                return voList;
-            }
+        if (!CollectionUtils.isEmpty(data) && clazz != null) {
+            int size = data.size();
+            List<T> voList = new ArrayList<>(size + (size / 2));
+            data.forEach(item -> {
+                try {
+                    T o = clazz.getDeclaredConstructor().newInstance();
+                    BeanUtils.copyProperties(item, o);
+                    voList.add(o);
+                } catch (Exception e) {
+                    log.error("执行对象Copy出现错误", e);
+                }
+            });
+            return voList;
         }
         return new ArrayList<>();
     }
@@ -236,15 +221,13 @@ public class CollectionUtil implements Serializable {
      * @param clazz 返出VO class
      */
     public static <T> T builderObject(Object data, Class<T> clazz) {
-        if (data != null) {
-            if (clazz != null) {
-                try {
-                    T o = clazz.newInstance();
-                    BeanUtils.copyProperties(data, o);
-                    return o;
-                } catch (Exception e) {
-                    log.error("执行对象Copy出现错误" + e.getMessage(), e);
-                }
+        if (data != null && clazz != null) {
+            try {
+                T o = clazz.getDeclaredConstructor().newInstance();
+                BeanUtils.copyProperties(data, o);
+                return o;
+            } catch (Exception e) {
+                log.error("执行对象Copy出现错误", e);
             }
         }
         return null;

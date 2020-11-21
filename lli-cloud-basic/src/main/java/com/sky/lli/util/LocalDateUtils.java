@@ -1,5 +1,7 @@
 package com.sky.lli.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
@@ -15,6 +17,7 @@ import java.time.temporal.TemporalAdjusters;
  */
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalDateUtils {
 
     //实体类常用注解 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -24,7 +27,6 @@ public class LocalDateUtils {
      * LocalDate 日期转换成年月数字形式,2020-07-30  -> 202007
      *
      * @param date LocalDate日期
-     *
      * @return data(int)
      */
     public static int truncateToYearMonth(LocalDate date) {
@@ -35,7 +37,6 @@ public class LocalDateUtils {
      * LocalDateTime 日期转换成年月数字形式,2020-07-30 20:00:20 -> 202007
      *
      * @param dateTime LocalDateTime
-     *
      * @return data(int)
      */
     public static int truncateToYearMonth(LocalDateTime dateTime) {
@@ -46,7 +47,6 @@ public class LocalDateUtils {
      * LocalDate 日期转换成年月数字形式,2020-07-30   -> 20200730
      *
      * @param date LocalDate日期
-     *
      * @return data(int)
      */
     public static int truncateToYearMonthDay(LocalDate date) {
@@ -57,7 +57,6 @@ public class LocalDateUtils {
      * LocalDateTime 日期转换成年月数字形式,2020-07-30 20:00:20  -> 20200730
      *
      * @param dateTime LocalDate日期
-     *
      * @return data(int)
      */
     public static int truncateToYearMonthDay(LocalDateTime dateTime) {
