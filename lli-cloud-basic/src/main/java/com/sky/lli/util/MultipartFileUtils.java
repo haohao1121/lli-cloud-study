@@ -19,20 +19,19 @@ import java.io.OutputStream;
  */
 
 @Slf4j
-public class FeignMultipartUtils {
+public class MultipartFileUtils {
 
     /**
      * 方法说明: 将文件转化问 MultipartFile
      *
      * @param file 文件
-     *
      * @date 2020-08-28
      * @author lihao
      */
 
     private MultipartFile getMultipartFile(File file) {
         final DiskFileItem item = new DiskFileItem("file", MediaType.MULTIPART_FORM_DATA_VALUE, true, file.getName(),
-                                                   100000000, file.getParentFile());
+                100000000, file.getParentFile());
         try {
             OutputStream os = item.getOutputStream();
             os.write(FileUtils.readFileToByteArray(file));
