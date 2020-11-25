@@ -1,3 +1,8 @@
+lli:
+  redis:
+    lock:
+      enable: true
+
 # 端口
 server:
   port: 8020
@@ -5,3 +10,18 @@ server:
 spring:
   application:
     name: lli-cloud-utils
+  redis:
+    sentinel:  # 哨兵模式配置
+      nodes: vm-1.lli.com:26379,vm-1.lli.com:26380,vm-1.lli.com:26381
+      master: mymaster
+    cluster: #集群模式配置
+      nodes: vm-1.lli.com:6310,vm-1.lli.com:6311,vm-1.lli.com:6312,vm-1.lli.com:6313,vm-1.lli.com:6314,vm-1.lli.com:6315
+    database: 1
+    password: 123456
+    lettuce:
+      pool:
+        max-active: 8
+        min-idle: 0
+        max-idle: 8
+        max-wait: 600000
+    timeout: 5000
