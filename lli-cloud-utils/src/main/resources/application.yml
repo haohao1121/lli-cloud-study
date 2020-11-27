@@ -11,12 +11,14 @@ spring:
   application:
     name: lli-cloud-utils
   redis:
-    sentinel:  # 哨兵模式配置
-      nodes: vm-1.lli.com:26379,vm-1.lli.com:26380,vm-1.lli.com:26381
-      master: mymaster
-    cluster: #集群模式配置
-      nodes: vm-1.lli.com:6310,vm-1.lli.com:6311,vm-1.lli.com:6312,vm-1.lli.com:6313,vm-1.lli.com:6314,vm-1.lli.com:6315
-    database: 1
+    host: vm-1.lli.com   # 单节点
+    port: 6378
+    #    sentinel:  # 哨兵模式配置
+    #      nodes: vm-1.lli.com:26379,vm-1.lli.com:26380,vm-1.lli.com:26381
+    #      master: mymaster
+    #    cluster: #集群模式配置
+    #      nodes: vm-1.lli.com:6310,vm-1.lli.com:6311,vm-1.lli.com:6312,vm-1.lli.com:6313,vm-1.lli.com:6314,vm-1.lli.com:6315
+    database: 0
     password: 123456
     lettuce:
       pool:

@@ -1,4 +1,4 @@
-package com.sky.lli.config.swagger;
+package com.sky.lli.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +35,8 @@ public class Knife4jSwaggerConfig {
         ticketPar.name("Token").description("token").modelRef(new ModelRef("string")).parameterType("header")
                         .defaultValue("").required(false).build();
         pars.add(ticketPar.build());
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("com.sky.lli.controller")).paths(PathSelectors.any())
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
+                        .apis(RequestHandlerSelectors.basePackage("com.sky.lli.controller")).paths(PathSelectors.any())
                         .build().globalOperationParameters(pars);
     }
 

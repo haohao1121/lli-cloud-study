@@ -29,21 +29,19 @@ public class TestUtilController {
 
     @ResponseBody
     @GetMapping("/test")
-    public String testRedisSentinel() {
-        String key = "testeqwea";
-        this.stringRedisTemplate.opsForValue().set(key, "hhasdfaaaha");
-        log.info("resid-sentinel放入key:[{}]", key);
+    public String testRedisSentinel(String key, String value) {
+        this.stringRedisTemplate.opsForValue().set(key, value);
+        log.info("redis-sentinel放入key:[{}]", key);
 
-        this.redisLock.runWithLockSync(key, "hh", TimeUnit.MINUTES, 10, () -> {
+        this.redisLock.runWithLockSync(key, value, TimeUnit.MINUTES, 10, () -> {
             testLock();
             return null;
         });
-
         return this.stringRedisTemplate.opsForValue().get(key);
     }
 
     private void testLock() {
-        log.info("redis-lock存入数据");
+        log.info("redis-lock执行");
     }
 
 }
