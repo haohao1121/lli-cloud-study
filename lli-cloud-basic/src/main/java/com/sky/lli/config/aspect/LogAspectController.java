@@ -74,7 +74,7 @@ public class LogAspectController {
         // 正常记录返回
         stopWatch.stop();
         if (result instanceof ResponseResult) {
-            markSuccessInMDC(stopWatch, (ResponseResult) result);
+            markSuccess(stopWatch, (ResponseResult) result);
         }
 
         // 清空MDC
@@ -88,7 +88,7 @@ public class LogAspectController {
      * @param stopWatch 计时器
      * @param result    返回信息
      */
-    private void markSuccessInMDC(StopWatch stopWatch, ResponseResult result) {
+    private void markSuccess(StopWatch stopWatch, ResponseResult result) {
         MDC.put(MDCLogsNames.REQUEST_RESULT_CODE.getMdczh(), result.getCode());
         MDC.put(MDCLogsNames.REQUEST_RESULT_MESSAGE.getMdczh(), result.getMessage());
         MDC.put(MDCLogsNames.COST_TIME.getMdczh(), String.valueOf(stopWatch.getTotalTimeMillis()));
@@ -101,7 +101,7 @@ public class LogAspectController {
      * @return 初始化的信息
      */
     private HashMap<String, String> getMdcInitMap(ProceedingJoinPoint pjp) {
-        HashMap<String, String> mdcParam = new HashMap<>();
+        HashMap<String, String> mdcParam = new HashMap<>(16);
         // 1.本次请求的UUID
         mdcParam.put(MDCLogsNames.REQUEST_UUID.getMdczh(), IdUtil.fastSimpleUUID());
         // 2.controller的方法名称
