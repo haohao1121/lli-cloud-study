@@ -18,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RestController
-@RequestMapping("/util")
-public class TestUtilController {
+@RequestMapping("/redis-lock")
+public class RedisLockTestController {
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;

@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.sky.lli.distributed.lock.zookeeper.ZookeeperAutoConfiguration

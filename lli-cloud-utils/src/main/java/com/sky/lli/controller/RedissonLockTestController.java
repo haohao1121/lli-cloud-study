@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
 
 @Slf4j
 @RestController
-@RequestMapping("/redisson")
+@RequestMapping("/redisson-lock")
 public class RedissonLockTestController {
     /**
      * The Distributed locker.
@@ -28,7 +28,7 @@ public class RedissonLockTestController {
      *
      * @throws Exception the exception
      */
-    @GetMapping(value = "/redlock")
+    @GetMapping(value = "/test")
     public String testRedlock() throws Exception {
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(5);
