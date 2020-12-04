@@ -20,7 +20,7 @@ import java.time.temporal.TemporalAdjusters;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalDateUtils {
 
-    //实体类常用注解 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //实体类常用注解 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     //或者配置全局 LocalDateTime 处理器
 
     /**

@@ -28,6 +28,7 @@
         <module>lli-cloud-consul-consume</module>
         <module>lli-cloud-admin</module>
         <module>lli-cloud-distributed-lock-zookeeper-starter</module>
+        <module>lli-cloud-sso</module>
     </modules>
 
 
