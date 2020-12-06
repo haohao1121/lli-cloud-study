@@ -29,8 +29,6 @@ public class ZkDistributedLock {
      */
     private static final String BASE_LOCK_PATH = "zk-lock";
 
-    //    ZKPaths.makePath(path1,path)
-
     private final ZookeeperDistributedLock zookeeperDistributedLock;
     private final NativeAsyncTaskExecutePool threadExecutePool;
 
@@ -68,7 +66,6 @@ public class ZkDistributedLock {
                 lock.release();
             } catch (Exception e) {
                 log.error("释放锁异常", e);
-                e.printStackTrace();
             }
         }
     }
@@ -100,7 +97,6 @@ public class ZkDistributedLock {
                 lock.release();
             } catch (Exception e) {
                 log.error("释放锁异常", e);
-                e.printStackTrace();
             }
         }
     }
