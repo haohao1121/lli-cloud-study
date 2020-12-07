@@ -16,6 +16,7 @@
     <inceptionYear>2021</inceptionYear>
     <modules>
         <module>lli-cloud-sso-shiro-cas</module>
+        <module>lli-cloud-kisso</module>
     </modules>
 
     <properties>
