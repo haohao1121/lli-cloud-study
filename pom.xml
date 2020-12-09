@@ -29,6 +29,7 @@
         <module>lli-cloud-admin</module>
         <module>lli-cloud-distributed-lock-zookeeper-starter</module>
         <module>lli-cloud-sso</module>
+        <module>lli-cloud-elk</module>
     </modules>
 
 
