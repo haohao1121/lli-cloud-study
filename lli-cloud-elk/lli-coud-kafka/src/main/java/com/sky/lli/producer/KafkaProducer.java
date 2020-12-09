@@ -22,7 +22,7 @@ public class KafkaProducer {
     @Resource
     private KafkaTemplate<String, Object> kafkaTemplate;
 
-    public static final String TOPIC_TEST = "topic.test";
+    public static final String TOPIC_TEST = "topic.quick.initial";
 
     public static final String TOPIC_GROUP1 = "topic.group1";
 
@@ -46,6 +46,6 @@ public class KafkaProducer {
                 log.info(TOPIC_TEST + " - 生产者 发送消息成功：" + result.toString());
             }
         });
-
     }
+
 }
