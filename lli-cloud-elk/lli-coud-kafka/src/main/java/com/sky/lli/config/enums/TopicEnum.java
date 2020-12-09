@@ -36,7 +36,7 @@ public enum TopicEnum {
                         .collect(Collectors.toList());
     }
 
-    public final String name;
+    private final String name;
     private int numPartitions;
     private short replicationFactor;
 

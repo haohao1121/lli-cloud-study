@@ -24,7 +24,7 @@ public class KafkaConsumer {
     public void group1Test(ConsumerRecord<?, ?> record, Acknowledgment ack,
                            @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
 
-        Optional message = Optional.ofNullable(record.value());
+        Optional<Object> message = Optional.ofNullable(record.value());
         if (message.isPresent()) {
             Object msg = message.get();
             log.info("topic_test 消费了： Topic:" + topic + ",Message:" + msg);
@@ -36,7 +36,7 @@ public class KafkaConsumer {
     public void group2Test(ConsumerRecord<?, ?> record, Acknowledgment ack,
                            @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
 
-        Optional message = Optional.ofNullable(record.value());
+        Optional<Object> message = Optional.ofNullable(record.value());
         if (message.isPresent()) {
             Object msg = message.get();
             log.info("topic_test1 消费了： Topic:" + topic + ",Message:" + msg);

@@ -1,6 +1,7 @@
 package com.sky.lli.config;
 
 import com.sky.lli.config.enums.TopicEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import javax.annotation.PostConstruct;
  * @date 2020/12/09
  */
 
+@Slf4j
 @Configuration
 public class KafkaConfig {
 
@@ -39,7 +41,10 @@ public class KafkaConfig {
      */
     @PostConstruct
     public void initTopic() {
-        AdminClient.create(kafkaAdmin.getConfig()).createTopics(TopicEnum.listAllTopic());
+        try (AdminClient adminClient = AdminClient.create(kafkaAdmin.getConfig())) {
+            adminClient.createTopics(TopicEnum.listAllTopic());
+        } catch (Exception e) {
+            log.error("init topic error:", e);
+        }
     }
-
 }
