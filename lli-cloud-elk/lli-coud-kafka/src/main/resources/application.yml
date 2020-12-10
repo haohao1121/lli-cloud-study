@@ -38,10 +38,12 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       # 值的反序列化方式
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # 事务隔离级别，有“read_uncommitted”和“read_committed”两种，默认情况为read_uncommitted，可以消费到HW处的位置
       isolation-level: read_committed
     listener:
       # 在侦听器容器中运行的线程数。
       concurrency: 5
       #listner负责ack，每调用一次，就立即commit
       ack-mode: manual_immediate
+      # 未发现topic时不报错: 自动创建topic需要设置未false
       missing-topics-fatal: false
