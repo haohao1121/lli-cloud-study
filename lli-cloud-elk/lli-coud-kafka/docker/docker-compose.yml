@@ -49,12 +49,12 @@ services:
   #      - kafka-zookeeper
 
   # kafka 图形界面,也可以使用 kafka-tool客户端查看
-  kafka-manager:
-    image: sheepkiller/kafka-manager
-    ports:
-      - 9000:9000
-    environment:
-      ZK_HOSTS: kafka-zookeeper:2181
-    depends_on:
-      - kafka-zookeeper
-      - kafka
+#  kafka-manager:
+#    image: sheepkiller/kafka-manager
+#    ports:
+#      - 9000:9000
+#    environment:
+#      ZK_HOSTS: kafka-zookeeper:2181
+#    depends_on:
+#      - kafka-zookeeper
+#      - kafka
