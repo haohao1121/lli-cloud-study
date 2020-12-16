@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>lli-coud-kafka</module>
+        <module>lli-cloud-elasticsearch</module>
     </modules>
 
 </project>

@@ -64,7 +64,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--加入下面两项配置-->
                 <executions>
                     <execution>
                         <goals>
@@ -72,34 +71,12 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <fork>true</fork>
-                    <addResources>true</addResources>
-                    <includeSystemScope>true</includeSystemScope>
-                </configuration>
             </plugin>
 
             <!-- Docker 插件 -->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>1.2.2</version>
-                <configuration>
-                    <serverId>${docker.server.id}</serverId>
-                    <dockerHost>${docker.build.host}</dockerHost>
-                    <registryUrl>${docker.registry.host}</registryUrl>
-                    <imageName>${docker.registry.host}/${docker.registry.name}/${project.artifactId}
-                    </imageName>
-                    <dockerDirectory>${project.basedir}/docker</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                    <pushImage>false</pushImage>
-                </configuration>
             </plugin>
         </plugins>
     </build>
