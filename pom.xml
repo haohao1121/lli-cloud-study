@@ -30,7 +30,6 @@
         <module>lli-cloud-distributed-lock-zookeeper-starter</module>
         <module>lli-cloud-sso</module>
         <module>lli-cloud-elk</module>
-        <module>lli-cloud-skywalking</module>
     </modules>
 
 
