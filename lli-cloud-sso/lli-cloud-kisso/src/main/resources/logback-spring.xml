@@ -30,7 +30,7 @@
         </filter>
         <File>logs/lli-app-info.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/lli-app-info.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <fileNamePattern>logs/lli-app-info.log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -48,7 +48,7 @@
         </filter>
         <File>logs/lli-app-error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/lli-app-error.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <fileNamePattern>logs/lli-app-error.log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
