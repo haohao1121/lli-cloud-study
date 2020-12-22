@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lli-coud-kafka</artifactId>
+    <artifactId>lli-cloud-kafka</artifactId>
 
-    <name>lli-coud-kafka</name>
+    <name>lli-cloud-kafka</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
