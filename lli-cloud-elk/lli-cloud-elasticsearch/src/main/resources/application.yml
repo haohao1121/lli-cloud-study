@@ -1,0 +1,20 @@
+#=============================
+# 端口
+server:
+  port: 8320
+#=============================
+
+spring:
+  application:
+    name: lli-elk-elasticsearch
+  elasticsearch:
+    rest:
+      uris: http://vm-2.lli.com:9200
+#      username: elastic
+#      password: 123456
+
+
+# logging日志
+logging:
+  level:
+    org.springframework.data.elasticsearch.core: DEBUG
