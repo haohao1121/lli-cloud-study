@@ -255,6 +255,10 @@
                             </resource>
                         </resources>
                         <pushImage>false</pushImage>
+                        <!-- Dockerfile 使用参数 -->
+                        <buildArgs>
+                            <APP_NAME>${project.artifactId}</APP_NAME>
+                        </buildArgs>
                     </configuration>
                 </plugin>
             </plugins>
