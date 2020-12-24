@@ -9,6 +9,7 @@ spring:
     name: lli-elk-elasticsearch
   elasticsearch:
     rest:
+      # 集群以逗号分隔
       uris: http://vm-2.lli.com:9200
 #      username: elastic
 #      password: 123456
