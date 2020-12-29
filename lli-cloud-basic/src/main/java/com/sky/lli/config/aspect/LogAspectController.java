@@ -2,6 +2,7 @@ package com.sky.lli.config.aspect;
 
 import cn.hutool.core.util.IdUtil;
 import com.sky.lli.config.handlerfilter.MDCLogsNames;
+import com.sky.lli.util.json.JsonUtils;
 import com.sky.lli.util.restful.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -66,7 +67,7 @@ public class LogAspectController {
             MDC.put(MDCLogsNames.REQUEST_RESULT_CODE.getMdczh(), "ERROR");
             MDC.put(MDCLogsNames.REQUEST_RESULT_MESSAGE.getMdczh(), "抛出错误");
             MDC.put(MDCLogsNames.COST_TIME.getMdczh(), String.valueOf(stopWatch.getTotalTimeMillis()));
-            log.error("请求异常", throwable);
+            log.error("记录日志:{}", JsonUtils.toJson(mdcParam));
             MDC.clear();
             throw throwable;
         }
@@ -75,6 +76,7 @@ public class LogAspectController {
         stopWatch.stop();
         if (result instanceof ResponseResult) {
             markSuccess(stopWatch, (ResponseResult) result);
+            log.info("记录日志:{}", JsonUtils.toJson(mdcParam));
         }
 
         // 清空MDC

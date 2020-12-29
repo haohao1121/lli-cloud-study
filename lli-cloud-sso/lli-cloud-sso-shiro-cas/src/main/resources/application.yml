@@ -8,7 +8,7 @@ spring:
   application:
     name: lli-shiro-cas
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_HOST:vm-1.lli.com}:${MYSQL_PORT:3306}/lli-db1?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true&rewriteBatchedStatements=TRUE&allowMultiQueries=true
     username: ${MYSQL_USERNAME:root}
     password: ${MYSQL_PASSWORD:root123}
