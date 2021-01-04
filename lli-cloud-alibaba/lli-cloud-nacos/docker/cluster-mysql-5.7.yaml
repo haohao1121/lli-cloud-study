@@ -1,0 +1,65 @@
+version: "3"
+services:
+  nacos1:
+    hostname: nacos1
+    container_name: nacos1
+    image: nacos/nacos-server:latest
+    volumes:
+      - ./cluster-logs/nacos1:/home/nacos/logs
+    ports:
+      - "8848:8848"
+      - "9555:9555"
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - NACOS_SERVERS=nacos1:8848 nacos2:8848 nacos3:8848
+      - MYSQL_SERVICE_HOST=mysql
+      - MYSQL_SERVICE_DB_NAME=nacos_cluster_dev
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=root123
+    restart: always
+    # 链接外部容器
+    external_links:
+      - mysql-5.7:mysql
+
+  nacos2:
+    hostname: nacos2
+    image: nacos/nacos-server:latest
+    container_name: nacos2
+    volumes:
+      - ./cluster-logs/nacos2:/home/nacos/logs
+    ports:
+      - "8849:8848"
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - NACOS_SERVERS=nacos1:8848 nacos2:8848 nacos3:8848
+      - MYSQL_SERVICE_HOST=mysql
+      - MYSQL_SERVICE_DB_NAME=nacos_cluster_dev
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=root123
+    restart: always
+    # 链接外部容器
+    external_links:
+      - mysql-5.7:mysql
+
+  nacos3:
+    hostname: nacos3
+    image: nacos/nacos-server:latest
+    container_name: nacos3
+    volumes:
+      - ./cluster-logs/nacos3:/home/nacos/logs
+    ports:
+      - "8850:8848"
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - NACOS_SERVERS=nacos1:8848 nacos2:8848 nacos3:8848
+      - MYSQL_SERVICE_HOST=mysql
+      - MYSQL_SERVICE_DB_NAME=nacos_cluster_dev
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=root123
+    restart: always
+    # 链接外部容器
+    external_links:
+      - mysql-5.7:mysql
