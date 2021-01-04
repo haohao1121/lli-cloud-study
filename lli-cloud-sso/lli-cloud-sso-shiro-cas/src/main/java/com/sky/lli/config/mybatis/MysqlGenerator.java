@@ -84,7 +84,7 @@ public class MysqlGenerator {
         gc.setBaseColumnList(true);
         gc.setSwagger2(true);
         gc.setFileOverride(true);
-        //TODO 默认雪花算法
+        // 默认雪花算法
         gc.setIdType(IdType.ASSIGN_ID);
         mpg.setGlobalConfig(gc);
 
