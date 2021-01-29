@@ -32,6 +32,7 @@
         <module>lli-cloud-elk</module>
         <module>lli-cloud-skywalking</module>
         <module>lli-cloud-alibaba</module>
+        <module>lli-cloud-mail</module>
     </modules>
 
 
