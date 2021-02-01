@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>lli-cloud-alibaba</artifactId>
     <packaging>pom</packaging>
+    <name>lli-cloud-alibaba</name>
     <modules>
         <module>lli-cloud-nacos</module>
     </modules>

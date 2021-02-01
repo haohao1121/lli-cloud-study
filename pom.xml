@@ -33,6 +33,7 @@
         <module>lli-cloud-skywalking</module>
         <module>lli-cloud-alibaba</module>
         <module>lli-cloud-mail</module>
+        <module>lli-cloud-rabbitmq</module>
     </modules>
 
 
