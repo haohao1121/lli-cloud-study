@@ -1,4 +1,4 @@
-package com.sky.lli.config.handlerfilter;
+package com.sky.lli.config.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020-01-01
  */
 @Configuration
-@ConditionalOnProperty(name = "lli.feign.token.enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "lli.feign-token.enable", havingValue = "true", matchIfMissing = true)
 public class FeignConfiguration {
     /**
      * 添加设置认证 token

@@ -4,6 +4,8 @@ import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Login;
 import com.baomidou.kisso.security.token.SSOToken;
+import com.sky.lli.config.annotation.AccessLimit;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author lihao (15215401693@163.com)
  * @date 2020/12/07
  */
-
+@Slf4j
 @RestController
 @RequestMapping("kis")
 public class KiSsoController {
@@ -24,7 +26,9 @@ public class KiSsoController {
     @Login(action = Action.Skip)
     @ResponseBody
     @GetMapping("/test")
-    public String home() {
+    @AccessLimit(count = 5,cycle = 5000)
+    public String test() {
+        log.info("时间:[{}]",System.currentTimeMillis());
         return "Hello Kisso!";
     }
 

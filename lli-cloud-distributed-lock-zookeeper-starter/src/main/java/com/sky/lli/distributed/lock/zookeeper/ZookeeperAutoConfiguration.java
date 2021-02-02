@@ -11,37 +11,45 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 描述: zk分布式锁
+ *
+ * @author lihao
+ */
 @Configuration
 @ConditionalOnClass(ZookeeperDistributedLock.class)
 @EnableConfigurationProperties(ZookeeperProperties.class)
 public class ZookeeperAutoConfiguration {
-
-    @Autowired
-    private ZookeeperProperties zookeeperProperties;
 
     /**
      * 初始休眠时间
      */
     private static final int BASE_SLEEP_TIME_MS = 1000;
 
+    private final ZookeeperProperties zookeeperProperties;
+
+    @Autowired
+    public ZookeeperAutoConfiguration(ZookeeperProperties zookeeperProperties) {
+        this.zookeeperProperties = zookeeperProperties;
+    }
+
     @Bean(destroyMethod = "close")
     @ConditionalOnMissingBean(CuratorFramework.class)
     public CuratorFramework curatorFramework() {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(BASE_SLEEP_TIME_MS,
-                                                              zookeeperProperties.getCuratorRetryCount());
+                zookeeperProperties.getCuratorRetryCount());
         CuratorFramework curatorFramework = CuratorFrameworkFactory.builder()
-                        .connectString(zookeeperProperties.getAddrs())
-                        .sessionTimeoutMs(zookeeperProperties.getCuratorSessionTimeoutMs())
-                        .connectionTimeoutMs(zookeeperProperties.getCuratorConnectionTimeoutMs())
-                        .retryPolicy(retryPolicy).build();
+                .connectString(zookeeperProperties.getAddrs())
+                .sessionTimeoutMs(zookeeperProperties.getCuratorSessionTimeoutMs())
+                .connectionTimeoutMs(zookeeperProperties.getCuratorConnectionTimeoutMs())
+                .retryPolicy(retryPolicy).build();
         curatorFramework.start();
         return curatorFramework;
     }
 
     @Bean
     public ZookeeperDistributedLock zookeeperDistributedLock() {
-        ZookeeperDistributedLock zookeeperDistributedLock = new ZookeeperDistributedLockImpl(curatorFramework());
-        return zookeeperDistributedLock;
+        return new ZookeeperDistributedLockImpl(curatorFramework());
     }
 
 }

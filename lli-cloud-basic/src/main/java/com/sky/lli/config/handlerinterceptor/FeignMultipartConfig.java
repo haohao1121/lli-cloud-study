@@ -36,8 +36,12 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class FeignMultipartConfig {
 
-    @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
+
+    @Autowired
+    public FeignMultipartConfig(ObjectFactory<HttpMessageConverters> messageConverters) {
+        this.messageConverters = messageConverters;
+    }
 
     @Bean
     @Primary

@@ -12,11 +12,12 @@ import java.lang.annotation.Target;
  * @date 2020/10/10
  */
 
-@Constraint(validatedBy = { NotLessThanZeroValidator.class })
-@Target({ ElementType.METHOD, ElementType.FIELD })
+@Constraint(validatedBy = {NotLessThanZeroValidator.class})
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NotLessThanZero {
-    String message();
+
+    String message() default "必须大于0";
 
     Class<?>[] groups() default {};
 

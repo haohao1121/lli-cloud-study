@@ -1,7 +1,7 @@
 package com.sky.lli.config.aspect;
 
 import cn.hutool.core.util.IdUtil;
-import com.sky.lli.config.handlerfilter.MDCLogsNames;
+import com.sky.lli.config.enums.MDCLogsNames;
 import com.sky.lli.util.json.JsonUtils;
 import com.sky.lli.util.restful.ResponseResult;
 import lombok.extern.slf4j.Slf4j;

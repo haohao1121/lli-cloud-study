@@ -5,6 +5,10 @@ import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Feign 请求拦截器
@@ -21,7 +25,10 @@ public class FeignTokenInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         // 上下文获取 Token 并追加到 Feign 请求上
-        String token = RequestTokenContext.getCurrentContext().get(TOKEN);
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        assert attributes != null;
+        HttpServletRequest request = attributes.getRequest();
+        String token = request.getHeader(TOKEN);
         template.header(TOKEN, token);
         //MDC请求链路唯一标识
         template.header(MDC_TAG, MDC.get(MDC_TAG));
