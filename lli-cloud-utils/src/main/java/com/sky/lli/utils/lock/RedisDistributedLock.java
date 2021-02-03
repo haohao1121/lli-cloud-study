@@ -15,11 +15,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis locker
- * <p/>
- * Created in 2018.12.05
- * <p/>
  *
- * @author Liaozihong
+ * @author lihao
  */
 
 @Slf4j
@@ -57,7 +54,6 @@ public class RedisDistributedLock {
      * @param waitTime     锁等待时间
      * @param lockTime     锁过期时间
      * @param fairLock     是否公平锁
-     *
      * @return the t
      */
     private <T> T lock(String resourceName, Callable<T> callable, int waitTime, int lockTime, boolean fairLock,
@@ -112,7 +108,6 @@ public class RedisDistributedLock {
      * @param waitTime     锁等待时间
      * @param lockTime     锁过期时间
      * @param fairLock     是否公平锁
-     *
      * @return 处理完具体的业务逻辑要返回的数据 t
      */
     public <T> T runWithLockSync(String resourceName, Callable<T> callable, int waitTime, int lockTime,
@@ -128,7 +123,6 @@ public class RedisDistributedLock {
      * @param callable     获取资源后的操作
      * @param waitTime     锁等待时间
      * @param lockTime     锁过期时间
-     *
      * @return 处理完具体的业务逻辑要返回的数据 t
      */
     public <T> T runWithLockSync(String resourceName, Callable<T> callable, int waitTime, int lockTime) {
@@ -167,9 +161,7 @@ public class RedisDistributedLock {
      * 方法说明: 组合key
      *
      * @param key 标识
-     *
      * @return 返回组合key
-     *
      * @date 2020-08-11
      * @author lihao
      */
