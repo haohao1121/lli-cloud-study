@@ -6,8 +6,9 @@ import com.sky.lli.model.MailModel;
  * 描述：
  * CLASSPATH: com.sky.lli.service.MailService
  * VERSION:   1.0
- * Created by lihao
  * DATE: 2019-05-24
+ *
+ * @author lihao
  */
 
 public interface MailService {

@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
  * 描述：
  * CLASSPATH: com.sky.lli.service.impl.DemoServiceImpl
  * VERSION:   1.0
- * Created by lihao
  * DATE: 2019-04-24
+ *
+ * @author lihao
  */
 
 @Service

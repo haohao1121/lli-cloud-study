@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
  * 描述：
  * CLASSPATH: com.sky.lli.controller.DemoController
  * VERSION:   1.0
- * Created by lihao
  * DATE: 2019-04-24
+ *
+ * @author lihao
  */
 
 @RestController
 @RequestMapping("/demo")
 public class DemoController {
 
-    //测试发送消息
     private static final String TEST_SEND_MESSAGE = "testSendMsg";
 
 

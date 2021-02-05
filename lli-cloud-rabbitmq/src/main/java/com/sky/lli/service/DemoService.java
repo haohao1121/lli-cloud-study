@@ -6,8 +6,8 @@ import com.sky.lli.model.DemoModel;
  * 描述：
  * CLASSPATH: com.sky.lli.service.DemoService
  * VERSION:   1.0
- * Created by lihao
  * DATE: 2019-04-24
+ * @author lihao
  */
 
 public interface DemoService {

@@ -32,24 +32,26 @@ import java.util.Objects;
 
 /**
  * 描述：
- * CLASSPATH: com.sky.lli.service.impl.MailServiceImpl
  * VERSION:   1.0
- * Created by lihao
  * DATE: 2019-05-24
+ *
+ * @author lihao
  */
 
 @Slf4j
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class MailServiceImpl implements MailService {
 
-    //临时文件下载目录
+    /**
+     * 临时文件下载目录
+     */
     @Value("${file.download.path}")
     private String fileSavePath;
     @Resource
-    private JavaMailSenderImpl mailSender;//注入邮件工具类
+    private JavaMailSenderImpl mailSender;
     @Resource
-    private TemplateEngine templateEngine;//模板引擎
+    private TemplateEngine templateEngine;
     @Resource
     private MongoTemplate mongoTemplate;
 
@@ -156,10 +158,10 @@ public class MailServiceImpl implements MailService {
                 //如果是url文件,先将文件下载到本地,然后添加到邮件里
                 String filePath = FileDownloadUtil.downloadFile(entry.getValue(), fileSavePath);
                 FileSystemResource res = new FileSystemResource(new File(filePath));
-                messageHelper.addInline(MimeUtility.encodeWord(res.getFilename()), res);
+                messageHelper.addInline(MimeUtility.encodeWord(Objects.requireNonNull(res.getFilename())), res);
             }
         } catch (Exception e) {
-            log.error("添加静态资源失败,错误信息如下:{}", e);
+            log.error("添加静态资源失败,错误信息如下:{}", e.getMessage());
             throw new ServiceException(MailExceptionEnum.MAIL_IMG_INLINE_FAIL);
         }
     }
