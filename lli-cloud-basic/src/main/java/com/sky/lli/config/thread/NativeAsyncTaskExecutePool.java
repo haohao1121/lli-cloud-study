@@ -13,6 +13,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * 描述：原生(Spring)异步任务线程池装配类
  *
+ * 链接用例: https://mp.weixin.qq.com/s/WbaqrAsTF1WkNcDR86K07w
+ *
  * @author klaus
  * @date 2019-08-14
  */
