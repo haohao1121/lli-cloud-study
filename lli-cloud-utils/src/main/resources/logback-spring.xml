@@ -2,6 +2,9 @@
 <configuration>
     <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
 
+    <!--配置的日志文件路径-->
+    <property name="LOG_PATH" value="${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}"/>
+
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
     <conversionRule conversionWord="wex"
