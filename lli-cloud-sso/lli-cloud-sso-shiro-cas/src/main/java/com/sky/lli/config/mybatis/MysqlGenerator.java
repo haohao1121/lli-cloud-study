@@ -1,9 +1,7 @@
 package com.sky.lli.config.mybatis;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -19,7 +17,6 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * @author code-generator
@@ -28,7 +25,7 @@ import java.util.Scanner;
 public class MysqlGenerator {
 
     public static final String DATABASE_URL = "jdbc:mysql://vm-1.lli.com:3306/lli-db1?useUnicode=true"
-                    + "&serverTimezone=GMT&useSSL=false&characterEncoding=utf8";
+            + "&serverTimezone=GMT&useSSL=false&characterEncoding=utf8";
     public static final String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
     public static final String DATABASE_USERNAME = "root";
     public static final String DATABASE_PASSWORD = "root123";
@@ -39,30 +36,12 @@ public class MysqlGenerator {
     public static final String XML_POSTFIX = "Mapper";
 
     public static final String AUTHOR = "lli";
-    public static final String[] SUPER_ENTITY_COLUMNS = { "id", "create_time", "update_time", "create_user",
-                    "update_user", "lock_version" };
+    public static final String[] SUPER_ENTITY_COLUMNS = {"id", "create_time", "update_time", "create_user",
+            "update_user", "lock_version"};
     public static final String PARENT_PACKAGE = "com.sky.lli";
     public static final String ENTITY_PACKAGE = "dao.entity";
     public static final String MAPPER_PACKAGE = "dao.mapper";
-
-    /**
-     * <p>
-     * 读取控制台内容
-     * </p>
-     */
-    public static String scanner(String tip) {
-        Scanner scanner = new Scanner(System.in);
-        StringBuilder help = new StringBuilder();
-        help.append("请输入" + tip + "：");
-        System.out.println(help.toString());
-        if (scanner.hasNext()) {
-            String ipt = scanner.next();
-            if (StringUtils.isNotBlank(ipt)) {
-                return ipt;
-            }
-        }
-        throw new MybatisPlusException("请输入正确的" + tip + "！");
-    }
+    public static final boolean ONLY_ENTITY = false;
 
     /**
      * RUN THIS
@@ -127,8 +106,11 @@ public class MysqlGenerator {
         TemplateConfig templateConfig = new TemplateConfig().setXml(null);
 
         //打开说明不需要覆盖或者生成以下类
-        if (true) {
-            templateConfig.setController(null);//.setService(null).setServiceImpl(null).setMapper(null);
+        if (ONLY_ENTITY) {
+            templateConfig.setController(null);
+            templateConfig.setService(null);
+            templateConfig.setServiceImpl(null);
+            templateConfig.setMapper(null);
         }
 
         mpg.setTemplate(templateConfig);
@@ -144,19 +126,15 @@ public class MysqlGenerator {
         strategy.setChainModel(true);
 
         //表名
-        String[] tables = new String[] { "base_user" };
+        String[] tables = new String[]{"base_user"};
         strategy.setInclude(tables);
         strategy.setControllerMappingHyphenStyle(true);
-        //        strategy.setEntityTableFieldAnnotationEnable(true);
         //乐观锁字段
         strategy.setVersionFieldName("lockVersion");
         strategy.setRestControllerStyle(true);
-        //        strategy.setTablePrefix("base_", "spp_");
 
         // 配置自动填充字段（Entity 会添加相应注解）
         List<TableFill> tableFillList = new ArrayList<>();
-        //        tableFillList.add(new TableFill("creator", FieldFill.INSERT));
-        //        tableFillList.add(new TableFill("updator", FieldFill.INSERT_UPDATE));
         strategy.setTableFillList(tableFillList);
 
         mpg.setStrategy(strategy);

@@ -1,15 +1,22 @@
 package com.sky.lli.controller;
 
 import com.sky.lli.utils.lock.RedisDistributedLock;
+import com.sky.lli.utils.thread.NativeAsyncTaskExecutePool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * @author lihao
+ * 方法说明: RedissonLockTestController
+ * @date 2021/4/14
+ */
 @Slf4j
 @RestController
 @RequestMapping("/redisson-lock")
@@ -18,14 +25,19 @@ public class RedissonLockTestController {
      * The Distributed locker.
      */
     @Autowired
-    RedisDistributedLock redisDistributedLock;
+    private RedisDistributedLock redisDistributedLock;
+
+    /**
+     * NativeAsyncTaskExecutePool
+     */
+    @Autowired
+    private NativeAsyncTaskExecutePool nativeAsyncTaskExecutePool;
 
     /**
      * Test redlock string.
      * 并发下分布式锁测试API
      *
      * @return the string
-     *
      * @throws Exception the exception
      */
     @GetMapping(value = "/test")
@@ -33,8 +45,9 @@ public class RedissonLockTestController {
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(5);
         // create and start threads
-        for (int i = 0; i < 5; ++i) {
-            new Thread(new Worker(startSignal, doneSignal)).start();
+        int num = 5;
+        for (int i = 0; i < num; ++i) {
+            Objects.requireNonNull(nativeAsyncTaskExecutePool.getAsyncExecutor()).execute(new Worker(startSignal, doneSignal));
         }
         startSignal.countDown(); // let all threads proceed
         doneSignal.await();
@@ -70,7 +83,7 @@ public class RedissonLockTestController {
             try {
                 startSignal.await();
                 //尝试加锁
-                redisDistributedLock.runWithLockSync("test", () -> doTask(), 30, 10);
+                redisDistributedLock.runWithLockSync("test", this::doTask, 30, 10);
             } catch (Exception e) {
                 log.warn("获取锁出现异常", e);
             }
@@ -82,10 +95,10 @@ public class RedissonLockTestController {
         String doTask() {
             System.out.println(Thread.currentThread().getName() + " 抢到锁!");
             Random random = new Random();
-            int _int = random.nextInt(200);
-            System.out.println(Thread.currentThread().getName() + " sleep " + _int + "millis");
+            int nextInt = random.nextInt(200);
+            System.out.println(Thread.currentThread().getName() + " sleep " + nextInt + "millis");
             try {
-                Thread.sleep(_int);
+                Thread.sleep(nextInt);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

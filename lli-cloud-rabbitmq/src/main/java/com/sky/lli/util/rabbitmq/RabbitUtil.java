@@ -25,6 +25,7 @@ import java.util.List;
  * 初版:
  * RabbitMQ 工具类
  * 基本用法封装
+ * @author lihao
  */
 @Configuration
 public class RabbitUtil {

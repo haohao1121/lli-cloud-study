@@ -26,13 +26,18 @@ public class KiSsoController {
     @Login(action = Action.Skip)
     @ResponseBody
     @GetMapping("/test")
-    @AccessLimit(count = 5,cycle = 5000)
+    @AccessLimit(count = 5, cycle = 5000)
     public String test() {
-        log.info("时间:[{}]",System.currentTimeMillis());
+        log.info("时间:[{}]", System.currentTimeMillis());
         return "Hello Kisso!";
     }
 
-    // 授权登录
+    /**
+     * @param request  request
+     * @param response response
+     * @date 2021/4/14
+     * 方法说明: 授权登录
+     */
     @GetMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response) {
         // 设置登录 COOKIE
@@ -40,7 +45,11 @@ public class KiSsoController {
         return "login success!";
     }
 
-    // 查看登录信息
+    /**
+     * @param request request
+     * @date 2021/4/14
+     * 方法说明: 查看登录信息
+     */
     @GetMapping("/token")
     public String token(HttpServletRequest request) {
         String msg = "暂未登录";
@@ -53,7 +62,6 @@ public class KiSsoController {
         return msg;
     }
 
-    // 退出登录
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         SSOHelper.clearLogin(request, response);

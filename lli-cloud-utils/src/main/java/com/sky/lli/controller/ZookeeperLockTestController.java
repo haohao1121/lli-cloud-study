@@ -2,13 +2,16 @@ package com.sky.lli.controller;
 
 import com.sky.lli.distributed.lock.zookeeper.ZookeeperDistributedLock;
 import com.sky.lli.utils.lock.ZkDistributedLock;
+import com.sky.lli.utils.thread.NativeAsyncTaskExecutePool;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -26,13 +29,19 @@ public class ZookeeperLockTestController {
 
     @Resource
     private ZkDistributedLock zkDistributedLock;
+    /**
+     * NativeAsyncTaskExecutePool
+     */
+    @Autowired
+    private NativeAsyncTaskExecutePool nativeAsyncTaskExecutePool;
 
     @ResponseBody
     @GetMapping("/test")
     public String test() {
 
-        for (int i = 0; i < 10; i++) {
-            new Thread(() -> {
+        int num = 10;
+        for (int i = 0; i < num; i++) {
+            Objects.requireNonNull(nativeAsyncTaskExecutePool.getAsyncExecutor()).execute(() -> {
 
                 String lockPath = "testlock";
                 zkDistributedLock.runWithLockSync(lockPath, 10, () -> {
@@ -40,7 +49,7 @@ public class ZookeeperLockTestController {
                     return null;
                 });
 
-            }).start();
+            });
         }
 
         return "zk-lock";
@@ -49,10 +58,10 @@ public class ZookeeperLockTestController {
     private void doTask() {
         System.out.println(Thread.currentThread().getName() + " 抢到锁!");
         Random random = new Random();
-        int _int = random.nextInt(200);
-        System.out.println(Thread.currentThread().getName() + " sleep " + _int + "millis");
+        int nextInt = random.nextInt(200);
+        System.out.println(Thread.currentThread().getName() + " sleep " + nextInt + "millis");
         try {
-            Thread.sleep(_int);
+            Thread.sleep(nextInt);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

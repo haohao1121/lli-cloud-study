@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author klaus
  */
 @SpringBootApplication
-public class FastDFSApplication {
+public class FastDfsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FastDFSApplication.class, args);
+        SpringApplication.run(FastDfsApplication.class, args);
     }
 
 }

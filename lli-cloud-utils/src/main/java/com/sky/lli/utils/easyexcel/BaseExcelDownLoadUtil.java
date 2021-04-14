@@ -26,7 +26,7 @@ import java.util.function.Supplier;
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public abstract class ExcelDownLoadUtil {
+public abstract class BaseExcelDownLoadUtil {
 
     public static void prepare(HttpServletResponse response, String filename) {
         response.setContentType("application/vnd.ms-excel");
@@ -56,12 +56,12 @@ public abstract class ExcelDownLoadUtil {
     public static void write(HttpServletResponse response, ExcelWriterSheetBuilder builder, String filename,
                              List<List<String>> excelHeadTittle, List<?> excelDataList) throws IOException {
         try {
-            ExcelDownLoadUtil.prepare(response, filename);
+            BaseExcelDownLoadUtil.prepare(response, filename);
             builder.head(excelHeadTittle);
             builder.doWrite(excelDataList);
         } catch (Exception e) {
             log.error("excel写入出错", e);
-            ExcelDownLoadUtil.fail(response);
+            BaseExcelDownLoadUtil.fail(response);
         }
     }
 
@@ -69,12 +69,12 @@ public abstract class ExcelDownLoadUtil {
                              Supplier<List<List<String>>> headTitleSupplier, Supplier<List<?>> excelDataSupplier)
             throws IOException {
         try {
-            ExcelDownLoadUtil.prepare(response, filename);
+            BaseExcelDownLoadUtil.prepare(response, filename);
             builder.head(headTitleSupplier.get());
             builder.doWrite(excelDataSupplier.get());
         } catch (Exception e) {
             log.error("excel写入出错", e);
-            ExcelDownLoadUtil.fail(response);
+            BaseExcelDownLoadUtil.fail(response);
         }
     }
 

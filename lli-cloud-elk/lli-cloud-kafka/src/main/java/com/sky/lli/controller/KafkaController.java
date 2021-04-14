@@ -24,7 +24,8 @@ public class KafkaController {
 
     @GetMapping("testSend")
     public void sendMsg() {
-        for (int i = 0; i < 10; i++) {
+        int num = 10;
+        for (int i = 0; i < num; i++) {
             this.kafkaProducer.send("this is test" + i + " msg");
         }
     }

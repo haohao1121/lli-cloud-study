@@ -15,11 +15,15 @@ import java.time.LocalDate;
  * 描述：
  * CLASSPATH: com.sky.lli.util.FileDownloadUtil
  * VERSION:   1.0
- * Created by lihao
+ *
+ * @author lihao
  * DATE: 2019-12-11
  */
 
 public class FileDownloadUtil {
+
+    private static final String HTTP = "http://";
+    private static final String HTTPS = "https://";
 
 
     /**
@@ -39,7 +43,7 @@ public class FileDownloadUtil {
         }
 
         //文件下载或拷贝
-        if (filePath.startsWith("http://") || filePath.startsWith("https://")) {
+        if (filePath.startsWith(HTTP) || filePath.startsWith(HTTPS)) {
             return downloadFromUrl(filePath, savePath, getFileName(filePath));
         } else {
             return copyFromFilePath(filePath, savePath, getFileName(filePath));
