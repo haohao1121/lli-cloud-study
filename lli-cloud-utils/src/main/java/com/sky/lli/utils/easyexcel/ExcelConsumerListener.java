@@ -2,13 +2,16 @@ package com.sky.lli.utils.easyexcel;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.alibaba.excel.metadata.Cell;
 import com.alibaba.fastjson.JSON;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.MapUtils;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -36,11 +39,14 @@ public class ExcelConsumerListener {
 
             @Override
             public void invoke(T t, AnalysisContext analysisContext) {
-                log.info("解析到一条数据:{}", JSON.toJSONString(t));
-                list.add(t);
-                if (list.size() == batchCount) {
-                    consumer.accept(list);
-                    list.clear();
+                Map<Integer, Cell> cellMap = analysisContext.readRowHolder().getCellMap();
+                if (MapUtils.isNotEmpty(cellMap)) {
+                    log.info("解析到一条数据:{}", JSON.toJSONString(t));
+                    list.add(t);
+                    if (list.size() == batchCount) {
+                        consumer.accept(list);
+                        list.clear();
+                    }
                 }
             }
 
