@@ -12,11 +12,12 @@
     <artifactId>lli-cloud-sso</artifactId>
     <packaging>pom</packaging>
 
-    <name>Maven</name>
+    <name>lli-cloud-sso</name>
     <inceptionYear>2021</inceptionYear>
     <modules>
-        <module>lli-cloud-sso-shiro-cas</module>
         <module>lli-cloud-kisso</module>
+        <module>lli-cloud-sso-shiro-cas</module>
+        <module>lli-cloud-sso-cas-server</module>
     </modules>
 
     <properties>
