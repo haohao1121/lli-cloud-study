@@ -1,0 +1,10 @@
+server:
+  port: 7302
+spring:
+  application:
+    name: lli-cloud-sso-cas-client-1
+
+cas:
+  server-url-prefix: http://localhost:8080/lli-cas
+  server-login-url: http://localhost:8080/lli-cas/login
+  client-host-url: http://localhost:${server.port}

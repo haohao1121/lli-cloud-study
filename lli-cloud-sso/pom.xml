@@ -18,6 +18,8 @@
         <module>lli-cloud-kisso</module>
         <module>lli-cloud-sso-shiro-cas</module>
         <module>lli-cloud-sso-cas-server</module>
+        <module>lli-cloud-sso-cas-client-1</module>
+        <module>lli-cloud-sso-cas-client-2</module>
     </modules>
 
     <properties>
