@@ -2,7 +2,7 @@ server:
   port: 7302
 spring:
   application:
-    name: lli-cloud-sso-cas-client-1
+    name: lli-cloud-sso-cas-client-2
 
 cas:
   server-url-prefix: http://localhost:8080/lli-cas
