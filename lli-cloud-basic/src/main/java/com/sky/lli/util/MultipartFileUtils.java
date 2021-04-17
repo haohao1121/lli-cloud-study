@@ -2,6 +2,8 @@ package com.sky.lli.util;
 
 import com.sky.lli.exception.ExceptionEnum;
 import com.sky.lli.exception.UtilsException;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
@@ -19,6 +21,7 @@ import java.io.OutputStream;
  */
 
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MultipartFileUtils {
 
     /**

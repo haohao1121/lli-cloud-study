@@ -1,6 +1,6 @@
 package com.sky.lli.producer;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -29,7 +29,7 @@ public class KafkaProducer {
     public static final String TOPIC_GROUP2 = "topic.group2";
 
     public void send(Object obj) {
-        String obj2String = JSONObject.toJSONString(obj);
+        String obj2String = JSON.toJSONString(obj);
         log.info("准备发送消息为：{}", obj2String);
         //发送消息
         ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send(TOPIC_TEST, obj);

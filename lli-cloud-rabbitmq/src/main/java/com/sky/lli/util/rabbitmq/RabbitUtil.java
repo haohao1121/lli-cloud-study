@@ -25,6 +25,7 @@ import java.util.List;
  * 初版:
  * RabbitMQ 工具类
  * 基本用法封装
+ *
  * @author lihao
  */
 @Configuration
@@ -234,7 +235,7 @@ public class RabbitUtil {
      * @param queue queue
      */
     public void addQueue(Queue queue) {
-        String queueName = rabbitAdmin.declareQueue(queue);
+        rabbitAdmin.declareQueue(queue);
         logger.info("已添加 Queue:{}", queue.getName());
     }
 

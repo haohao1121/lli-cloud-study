@@ -1,9 +1,11 @@
 package com.sky.lli.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sky.lli.dao.EsDemoRepository;
 import com.sky.lli.dao.model.Demo;
 import com.sky.lli.util.restful.ResponseResult;
 import com.sky.lli.util.restful.ResultResponseUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,7 @@ import javax.annotation.Resource;
  * @date 2020/12/21
  */
 
+@Slf4j
 @RestController
 @RequestMapping("demo")
 public class TestController {
@@ -39,6 +42,7 @@ public class TestController {
         this.esDemoRepository.save(demo);
 
         Demo demo1 = this.esDemoRepository.findById(demo.getId()).orElse(null);
+        log.info(JSON.toJSONString(demo1));
 
         Page<Demo> all = this.esDemoRepository.findAll(pageable);
 
