@@ -23,21 +23,30 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class LocalDateConfig {
 
+    /**
+     * 年月日
+     */
+    private static final String LOCAL_DATE = "yyyy-MM-dd";
+    /**
+     * 年月日 时分秒
+     */
+    private static final String LOCAL_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
+
     @Bean
     public ObjectMapper initObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
 
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         javaTimeModule.addDeserializer(LocalDate.class,
-                                       new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                new LocalDateDeserializer(DateTimeFormatter.ofPattern(LOCAL_DATE)));
         javaTimeModule.addSerializer(LocalDate.class,
-                                     new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                new LocalDateSerializer(DateTimeFormatter.ofPattern(LOCAL_DATE_TIME)));
         //localDate按照 "yyyy-MM-dd"的格式进行序列化、反序列化
 
         javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                DateTimeFormatter.ofPattern(LOCAL_DATE_TIME)));
         javaTimeModule.addSerializer(LocalDateTime.class,
-                                     new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(LOCAL_DATE_TIME)));
         //localDateTime按照 "yyyy-MM-dd HH:mm:ss"的格式进行序列化、反序列化
 
         objectMapper.registerModule(javaTimeModule);

@@ -3,6 +3,9 @@ package com.sky.lli.util;
 import com.google.common.net.UrlEscapers;
 import com.sky.lli.exception.MailExceptionEnum;
 import com.sky.lli.exception.ServiceException;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.util.StringUtils;
 
@@ -20,6 +23,7 @@ import java.time.LocalDate;
  * DATE: 2019-12-11
  */
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FileDownloadUtil {
 
     private static final String HTTP = "http://";

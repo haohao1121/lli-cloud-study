@@ -111,7 +111,7 @@ public class PinyinUtil implements Serializable {
                 String str = String.valueOf(clChar);
                 // 如果字符是中文,则将中文转为汉语拼音,并取第一个字母
                 if (str.matches(STRING_REGEX)) {
-                    pinyin.append(PinyinHelper.toHanyuPinyinStringArray(clChar, defaultFormat)[0].substring(0, 1));
+                    pinyin.append(PinyinHelper.toHanyuPinyinStringArray(clChar, defaultFormat)[0], 0, 1);
                 } else if (str.matches(NUMBER_REGEX)) {
                     // 如果字符是数字,取数字
                     pinyin.append(clChar);
