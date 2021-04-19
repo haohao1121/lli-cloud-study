@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static java.util.Objects.isNull;
 
@@ -124,7 +125,7 @@ public class LogAspectController {
         if (!isNull(request.getHeader(MDC_TAG))) {
             mdcParam.put(MDCLogsNames.REQUEST_UUID.getMdczh(), request.getHeader(MDC_TAG));
         }
-        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        HttpServletResponse response = Objects.requireNonNull((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         assert response != null;
         // 返回MDC唯一标识,便于问题排查
         response.setHeader(MDC_TAG, mdcParam.get(MDCLogsNames.REQUEST_UUID.getMdczh()));
