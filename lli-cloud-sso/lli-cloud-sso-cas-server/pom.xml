@@ -3,18 +3,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <parent>
-        <artifactId>lli-cloud-sso</artifactId>
-        <groupId>com.sky.lli</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+    <!--    <parent>-->
+    <!--        <artifactId>lli-cloud-sso</artifactId>-->
+    <!--        <groupId>com.sky.lli</groupId>-->
+    <!--        <version>1.0-SNAPSHOT</version>-->
+    <!--    </parent>-->
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.sky.lli</groupId>
     <artifactId>lli-cloud-sso-cas-server</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>lli-cloud-sso-cas-server</name>
-
 
     <build>
         <plugins>
@@ -30,6 +30,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
                 <configuration>
                     <mainClass>${mainClassName}</mainClass>
                     <addResources>true</addResources>
@@ -49,7 +50,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <warName>sso-cas-server</warName>
+                    <warName>${project.build.finalName}</warName>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <recompressZippedFiles>false</recompressZippedFiles>
                     <archive>
@@ -69,13 +70,60 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
             </plugin>
+            <!-- Docker 插件 -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <configuration>
+                    <serverId>${docker.server.id}</serverId>
+                    <dockerHost>${docker.build.host}</dockerHost>
+                    <registryUrl>${docker.registry.host}</registryUrl>
+                    <imageName>${docker.registry.host}/${docker.registry.name}/${project.artifactId}
+                    </imageName>
+                    <dockerDirectory>${project.basedir}/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.war</include>
+                        </resource>
+                    </resources>
+                    <pushImage>false</pushImage>
+                    <!-- Dockerfile 使用参数 -->
+                    <buildArgs>
+                        <APP_NAME>${project.artifactId}</APP_NAME>
+                    </buildArgs>
+                </configuration>
+            </plugin>
         </plugins>
-        <finalName>sso-cas-server</finalName>
+        <finalName>lli-cas-server</finalName>
     </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-webapp${app.server}</artifactId>
+            <version>${cas.version}</version>
+            <type>war</type>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--引入rest认证相关 start -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-rest-authentication</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!--引入rest认证相关 end -->
+
+    </dependencies>
+
     <properties>
-        <cas.version>5.3.16</cas.version>
-        <!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan to provide appserver -->
+        <cas.version>5.2.0</cas.version>
+        <springboot.version>1.5.8.RELEASE</springboot.version>
+        <!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan
+            to provide appserver -->
         <app.server>-tomcat</app.server>
 
         <mainClassName>org.springframework.boot.loader.WarLauncher</mainClassName>
@@ -87,7 +135,44 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+
+        <!-- Docker 配置开始 -->
+        <docker.host.ip>harbor.lli.com</docker.host.ip>
+        <docker.build.host>http://${docker.host.ip}:2375</docker.build.host>
+        <docker.registry.host>${docker.host.ip}:6100</docker.registry.host>
+        <docker.registry.name>myharbor</docker.registry.name>
+        <docker.server.id>docker-harbor</docker.server.id>
+        <!-- Docker 配置结束 -->
     </properties>
+
+
+    <repositories>
+        <repository>
+            <id>sonatype-releases</id>
+            <url>http://oss.sonatype.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>shibboleth-releases</id>
+            <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
 
     <profiles>
         <profile>
@@ -95,20 +180,11 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <id>default</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.apereo.cas</groupId>
-                    <artifactId>cas-server-webapp${app.server}</artifactId>
-                    <version>${cas.version}</version>
-                    <type>war</type>
-                    <scope>runtime</scope>
-                </dependency>
-                <!--
-                ...Additional dependencies may be placed here...
-                -->
-            </dependencies>
+            <properties>
+                <mainClassName>org.apereo.cas.web.CasWebApplication</mainClassName>
+                <isExecutable>true</isExecutable>
+            </properties>
         </profile>
-
     </profiles>
 
 </project>
