@@ -20,6 +20,7 @@
         <module>lli-cloud-sso-cas-server</module>
         <module>lli-cloud-sso-cas-client-1</module>
         <module>lli-cloud-sso-cas-client-2</module>
+        <module>lli-cloud-sso-cas-auth</module>
     </modules>
 
     <properties>
