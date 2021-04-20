@@ -117,6 +117,22 @@
         </dependency>
         <!--引入rest认证相关 end -->
 
+        <!--redis保存ticket start -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-redis-ticket-registry</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!--redis保存ticket end -->
+
+        <!--redis保存session start -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-webapp-session-redis</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!--redis保存session end -->
+
     </dependencies>
 
     <properties>
