@@ -133,6 +133,14 @@
         </dependency>
         <!--redis保存session end -->
 
+        <!--swagger-ui start https://apereo.github.io/cas/5.2.x/integration/Swagger-Integration.html -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-documentation-swagger</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <!--swagger-ui end -->
+
     </dependencies>
 
     <properties>
