@@ -2,6 +2,7 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <artifactId>lli-cloud-sso</artifactId>
         <groupId>com.sky.lli</groupId>
@@ -9,16 +10,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lli-cloud-sso-cas-client-2</artifactId>
-    <name>lli-cloud-sso-cas-client-2</name>
+    <artifactId>lli-cloud-sso-spring-security-cas-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
+    <name>lli-cloud-sso-spring-security-cas-client</name>
 
     <dependencies>
-        <dependency>
-            <groupId>com.sky.lli</groupId>
-            <artifactId>lli-cloud-basic</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -39,6 +36,18 @@
             <artifactId>cas-client-support-springboot</artifactId>
             <version>3.6.2</version>
         </dependency>
+        <!-- Spring Boot Web 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <!-- 排除默认Tomcat 依赖 -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <build>
@@ -49,4 +58,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

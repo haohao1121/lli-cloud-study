@@ -5,6 +5,6 @@ spring:
     name: lli-cloud-sso-cas-client-2
 
 cas:
-  server-url-prefix: http://localhost:8080/lli-cas
-  server-login-url: http://localhost:8080/lli-cas/login
+  server-url-prefix: http://localhost:8080/cas
+  server-login-url: http://localhost:8080/cas/login
   client-host-url: http://localhost:${server.port}

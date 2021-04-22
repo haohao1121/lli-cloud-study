@@ -22,10 +22,25 @@ public class TestController {
      *
      * @return 测试数据
      */
-    @GetMapping("client1")
+    @GetMapping("client")
     public ResponseResult<Object> client() {
         log.info("client1");
 
         return ResultResponseUtils.success("client-1");
     }
+
+    @GetMapping("test")
+    public ResponseResult<Object> test() {
+        log.info("test");
+
+        return ResultResponseUtils.success("test");
+    }
+
+    @GetMapping("test/aaa")
+    public ResponseResult<Object> test2() {
+        log.info("test1");
+
+        return ResultResponseUtils.success("test1");
+    }
+
 }
