@@ -141,6 +141,12 @@
         </dependency>
         <!--swagger-ui end -->
 
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-token-tickets</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
     </dependencies>
 
     <properties>

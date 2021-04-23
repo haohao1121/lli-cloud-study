@@ -78,9 +78,8 @@ public class CasLoginController {
      * This allows the CAS server to reach to a remote REST endpoint via a POST for verification of credentials.
      * Credentials are passed via an Authorization header whose value is Basic XYZ where XYZ is a Base64 encoded version of the credentials.
      *
-     * @param httpHeaders
-     * @return
-     * @throws UnsupportedEncodingException
+     * @param httpHeaders httpHeaders
+     * @throws UnsupportedEncodingException ex
      */
     private UserTemp obtainUserFormHeader(HttpHeaders httpHeaders) throws UnsupportedEncodingException {
 
