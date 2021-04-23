@@ -19,7 +19,6 @@
         <module>lli-cloud-sso-shiro-cas</module>
         <module>lli-cloud-sso-cas-server</module>
         <module>lli-cloud-sso-cas-client</module>
-        <module>lli-cloud-sso-shiro-cas-client</module>
         <module>lli-cloud-sso-cas-auth</module>
         <module>lli-cloud-sso-spring-security-cas-client</module>
     </modules>
