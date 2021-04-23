@@ -4,12 +4,11 @@ lli-cloud-sso-cas-client
 原生java-cas-client,采用最新3.6.2版本
 
 ### Advanced configuration
-由于该模块没有对外开放原CAS client configuration options,但是我们可以自己实现 `CasClientConfigurer` 来自定义添加我们需要的配置,
+由于该模块没有对外开放原CAS client configuration 所有配置,但是我们可以自己实现 `CasClientConfigurer` 来自定义添加我们需要的配置,
 比如排除不需要登录验证的url路径等.
 
 #### 使用方式
-1. 使用maven install到本地仓库
-2. 引入依赖
+1. 引入依赖
 ```
     <dependency>
       <groupId>org.jasig.cas.client</groupId>
@@ -17,7 +16,7 @@ lli-cloud-sso-cas-client
       <version>3.6.2</version>
     </dependency>
 ```
-3.项目配置
+2.项目配置
 ```
     cas:
       server-url-prefix: http://localhost:8080/cas
@@ -25,13 +24,17 @@ lli-cloud-sso-cas-client
       client-host-url: http://localhost:${server.port}
 ```
 
-3.启动类或自定义配置类添加注解 @EnableCasClient
+3.启动类或自定义配置类添加注解
 ```
-    @Autowired
-    private ZookeeperDistributedLock zookeeperDistributedLock;
+    @EnableCasClient
+    public class CasClientOneApplication {
+        public static void main(String[] args) {
+            SpringApplication.run(CasClientOneApplication.class, args);
+        }
+    }
 ```
 
-4.排除不需要验证的url
+4.排除不需要验证的url,也可以把过滤路径提取到 `application.yml` 文件里
 ```
     @Configuration
     public class MyCasClientConfiguration implements CasClientConfigurer {
