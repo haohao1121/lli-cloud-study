@@ -21,6 +21,7 @@
         <module>lli-cloud-sso-cas-client</module>
         <module>lli-cloud-sso-cas-auth</module>
         <module>lli-cloud-sso-spring-security-cas-client</module>
+        <module>lli-cloud-sso-shiro-pac4j-cas-client</module>
     </modules>
 
     <properties>
