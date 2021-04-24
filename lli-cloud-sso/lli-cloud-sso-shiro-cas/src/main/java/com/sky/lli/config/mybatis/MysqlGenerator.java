@@ -36,7 +36,7 @@ public class MysqlGenerator {
     public static final String XML_POSTFIX = "Mapper";
 
     public static final String AUTHOR = "lli";
-    public static final String[] SUPER_ENTITY_COLUMNS = {"id", "create_time", "update_time", "create_user",
+    protected static final String[] SUPER_ENTITY_COLUMNS = {"id", "create_time", "update_time", "create_user",
             "update_user", "lock_version"};
     public static final String PARENT_PACKAGE = "com.sky.lli";
     public static final String ENTITY_PACKAGE = "dao.entity";
