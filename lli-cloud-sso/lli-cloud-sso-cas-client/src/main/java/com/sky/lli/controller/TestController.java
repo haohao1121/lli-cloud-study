@@ -61,28 +61,10 @@ public class TestController {
         }
     }
 
-    @GetMapping("test/aaa")
-    public ResponseResult<Object> test() {
-        //都不需要登录
-        String url = "http://localhost:7302/test/ccc";
-        String str = restTemplate.getForObject(getProxyUrl(url), String.class);
-        return ResultResponseUtils.success(str);
-    }
-
     @GetMapping("test/ccc")
     public ResponseResult<Object> ccc() {
         log.info("ccc收到请求");
-        //都不需要登录
-        return ResultResponseUtils.success("ccc不需要认证");
+        //不需要登录
+        return ResultResponseUtils.success("当前方法不需要认证");
     }
-
-    @GetMapping("test/bbb")
-    public ResponseResult<Object> a2b() {
-        //不需要登录条用需要登录
-        String url = "http://localhost:7302/hello";
-        String str = restTemplate.getForObject(getProxyUrl(url), String.class);
-        return ResultResponseUtils.success(str);
-    }
-
-
 }
