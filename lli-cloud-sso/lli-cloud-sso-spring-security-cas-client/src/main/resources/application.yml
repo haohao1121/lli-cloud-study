@@ -1,10 +1,40 @@
 server:
-  port: 7303
+  port: 7501
 spring:
   application:
-    name: lli-cloud-sso-cas-client-1
-
+    name: lli-cloud-sso-security-cas-client
+  ################################################################################################################
+  ###Spring Security Cas 相关配置：
+  ################################################################################################################
+  # 权限控制
+  security:
+    # 默认路径拦截规则定义
+    filter-chain-definition-map:
+      '[/]': anon
+      '[/**/favicon.ico]': anon
+      '[/error*]': anon
+      '[/swagger-ui.html**]': anon
+      '[/swagger-resources/**]': anon
+      '[/doc.html]': anon
+      '[/v2/**]': anon
+      '[/v2/api-docs]': anon
+      '[/authz/logout]': anon
+      '[/druid/*]': ipaddr[192.168.1.0/24]
+      '[/monitoring]': roles[admin]
+      '[/monitoring2]': roles[1,admin]
+      '[/monitoring3]': perms[1,admin]
+      '[/monitoring4]': perms[1]
+### Cas 配置
 cas:
   server-url-prefix: http://localhost:8080/lli-cas
   server-login-url: http://localhost:8080/lli-cas/login
   client-host-url: http://localhost:${server.port}
+  accept-any-proxy: true
+  single-logout:
+    enabled: true
+  proxy-callback-url: http://localhost:${server.port}/proxy/callback
+  proxy-receptor-url: /proxy/callback
+  allowed-proxy-chains: /*
+  ignore-pattern:
+    - /healthCheck
+    - /test/*

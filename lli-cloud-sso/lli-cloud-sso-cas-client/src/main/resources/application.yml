@@ -2,7 +2,7 @@ server:
   port: 7301
 spring:
   application:
-    name: lli-cloud-sso-cas-client-1
+    name: lli-cloud-sso-cas-client
 
 cas:
   server-url-prefix: http://localhost:8080/cas
@@ -14,3 +14,6 @@ cas:
   proxy-callback-url: http://localhost:${server.port}/proxy/callback
   proxy-receptor-url: /proxy/callback
   allowed-proxy-chains: /*
+  ignore-pattern:
+    - /healthCheck
+    - /test/*
