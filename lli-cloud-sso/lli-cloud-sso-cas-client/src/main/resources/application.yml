@@ -8,3 +8,9 @@ cas:
   server-url-prefix: http://localhost:8080/cas
   server-login-url: http://localhost:8080/cas/login
   client-host-url: http://localhost:${server.port}
+  accept-any-proxy: true
+  single-logout:
+    enabled: true
+  proxy-callback-url: http://localhost:${server.port}/proxy/callback
+  proxy-receptor-url: /proxy/callback
+  allowed-proxy-chains: /*

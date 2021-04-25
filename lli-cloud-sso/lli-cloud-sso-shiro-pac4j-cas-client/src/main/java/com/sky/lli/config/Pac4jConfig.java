@@ -22,7 +22,7 @@ public class Pac4jConfig {
     @Resource
     private Pac4jCasProperties pac4jCasProperties;
 
-    @Bean("authcConfig")
+    @Bean
     public Config config(CasClient casClient, ShiroSessionStore shiroSessionStore) {
         Config config = new Config();
         config.setSessionStore(shiroSessionStore);

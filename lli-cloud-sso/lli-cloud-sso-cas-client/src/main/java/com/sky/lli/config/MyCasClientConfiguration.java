@@ -27,7 +27,7 @@ public class MyCasClientConfiguration implements CasClientConfigurer {
         //不需要认证的路径
         List<String> ignoreUrlPattern = new ArrayList<>();
         ignoreUrlPattern.add("/healthCheck");
-        ignoreUrlPattern.add("/test/");
+        ignoreUrlPattern.add("/test/*");
 
         authenticationFilter.addInitParameter(ConfigurationKeys.IGNORE_PATTERN.getName(), String.join("|", ignoreUrlPattern));
         authenticationFilter.addInitParameter(ConfigurationKeys.IGNORE_URL_PATTERN_TYPE.getName(), ConfigurationKeys.IGNORE_URL_PATTERN_TYPE.getDefaultValue());

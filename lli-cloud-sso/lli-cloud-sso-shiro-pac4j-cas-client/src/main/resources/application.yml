@@ -1,0 +1,15 @@
+server:
+  port: 8401
+spring:
+  application:
+    name: shiri-pac4j-cas-client
+
+shiro:
+  filter-chain-definition-map:
+    /test/**: anon
+    /**: authc
+  cas:
+    server-url-prefix: http://localhost:8080/cas
+    server-login-url: http://localhost:8080/cas/login
+    client-host-url: http://localhost:${server.port}
+    client-name: shiri-pac4j-cas-client

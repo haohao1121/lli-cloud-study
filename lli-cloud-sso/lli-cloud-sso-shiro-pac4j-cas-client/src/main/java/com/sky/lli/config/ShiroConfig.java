@@ -63,8 +63,6 @@ public class ShiroConfig {
         casRealm.setCachingEnabled(false);
         casRealm.setAuthenticationCachingEnabled(false);
         casRealm.setAuthorizationCachingEnabled(false);
-        //realm.setAuthenticationCacheName("authenticationCache");
-        //realm.setAuthorizationCacheName("authorizationCache");
         return casRealm;
     }
 
@@ -148,7 +146,7 @@ public class ShiroConfig {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionIdCookie(sessionIdCookie);
         sessionManager.setSessionIdCookieEnabled(true);
-        sessionManager.setGlobalSessionTimeout(30 * 60 * 1000);
+        sessionManager.setGlobalSessionTimeout(30 * 60 * 1000L);
         sessionManager.setSessionDAO(redisSessionDAO);
         sessionManager.setDeleteInvalidSessions(true);
         sessionManager.setSessionValidationSchedulerEnabled(true);
