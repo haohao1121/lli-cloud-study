@@ -1,10 +1,10 @@
 package com.sky.lli.config;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,15 +14,16 @@ import java.util.List;
  * @date 2021/4/25
  */
 
-@Data
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(CasProperties.PREFIX)
 public class CasProperties {
 
-    public static final String PREFIX = "cas";
+    public static final String PREFIX = "cas-authc";
 
     /**
      * cas filter不需要登录的路径
      */
-    private List<String> ignorePattern = new ArrayList<>();
+    private List<String> ignorePattern;
 }

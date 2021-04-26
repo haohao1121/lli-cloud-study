@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.net.URI;
 import java.net.URLEncoder;
 
@@ -33,6 +34,18 @@ public class TestController {
     public ResponseResult<Object> hello() {
         log.info("hello收到请求");
         return ResultResponseUtils.success("hello");
+    }
+
+    @GetMapping("admin/test")
+    public ResponseResult<Object> adminTest() {
+        log.info("adminTest收到请求");
+        return ResultResponseUtils.success("adminTest");
+    }
+
+    @GetMapping("ipAddr/test")
+    public ResponseResult<Object> ipAddrTest() {
+        log.info("ipAddr收到请求");
+        return ResultResponseUtils.success("ipAddr");
     }
 
     /**
@@ -66,5 +79,20 @@ public class TestController {
         log.info("ccc收到请求");
         //不需要登录
         return ResultResponseUtils.success("当前方法不需要认证");
+    }
+
+    @GetMapping("aaa")
+    public ResponseResult<Object> aaa() {
+        log.info("aaa收到请求");
+        //不需要登录
+        return ResultResponseUtils.success("aaa");
+    }
+
+    @GetMapping("logout")
+    public ResponseResult<Object> logout(HttpSession session) {
+        log.info("logout收到请求");
+        session.invalidate();
+        //不需要登录
+        return ResultResponseUtils.success("logout");
     }
 }

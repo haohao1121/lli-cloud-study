@@ -3,7 +3,7 @@ server:
 spring:
   application:
     name: lli-cloud-sso-cas-client
-
+##### Cas 相关配置
 cas:
   server-url-prefix: http://localhost:8080/cas
   server-login-url: http://localhost:8080/cas/login
@@ -14,6 +14,10 @@ cas:
   proxy-callback-url: http://localhost:${server.port}/proxy/callback
   proxy-receptor-url: /proxy/callback
   allowed-proxy-chains: /*
+##### Cas url authc 配置
+cas-authc:
   ignore-pattern:
     - /healthCheck
     - /test/*
+
+

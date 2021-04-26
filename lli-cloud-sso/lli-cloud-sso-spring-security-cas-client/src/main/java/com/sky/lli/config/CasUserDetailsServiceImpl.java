@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +19,7 @@ import java.util.Collection;
  */
 
 @Slf4j
+@Component
 public class CasUserDetailsServiceImpl implements AuthenticationUserDetailsService<CasAssertionAuthenticationToken> {
 
     @Override
@@ -26,7 +28,14 @@ public class CasUserDetailsServiceImpl implements AuthenticationUserDetailsServi
         log.debug("current username [{}]", username);
         // 这里应该查询数据库获取具体的用户信息和权限信息
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        /*
+         * SimpleGrantedAuthority
+         * 注意:
+         *      1.以 ROLE_  开头,代表 角色名称,hasAnyRole方法验证的时候 默认会拼接 "ROLE_" 与当前值匹配
+         *      2.否则代表权限
+         */
+        authorities.add(new SimpleGrantedAuthority("ROLE_BASE_ROLE"));
+        authorities.add(new SimpleGrantedAuthority("admin"));
         return new User(username, username, authorities);
     }
 }

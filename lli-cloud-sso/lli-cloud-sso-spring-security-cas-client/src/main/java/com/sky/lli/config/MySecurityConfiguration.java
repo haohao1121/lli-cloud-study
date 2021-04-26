@@ -1,5 +1,6 @@
 package com.sky.lli.config;
 
+import cn.hutool.core.util.StrUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -45,8 +46,32 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
      * 用户自定义的AuthenticationUserDetailsService
      */
     @Bean
-    public AuthenticationUserDetailsService<CasAssertionAuthenticationToken> casUserDetailsService() {
+    public AuthenticationUserDetailsService<CasAssertionAuthenticationToken> springSecurityCasUserDetailsService() {
         return new CasUserDetailsServiceImpl();
+    }
+
+    /**
+     * 静态资源开放权限
+     */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+
+        // 对过滤链按过滤器名称进行分组
+        Map<Object, List<Map.Entry<String, String>>> groupingMap = securityCasProperties.getFilterChainDefinitionMap().entrySet()
+                .stream().collect(Collectors.groupingBy(Map.Entry::getValue, TreeMap::new, Collectors.toList()));
+
+        //anon权限集合
+        List<Map.Entry<String, String>> noneEntries = groupingMap.get("anon");
+        List<String> permitMatchers = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(noneEntries)) {
+            for (Map.Entry<String, String> mapper : noneEntries) {
+                permitMatchers.add(mapper.getKey());
+            }
+        }
+        web.ignoring().antMatchers(permitMatchers.toArray(new String[0]))
+                .antMatchers(HttpMethod.OPTIONS, "/**");
+
+        super.configure(web);
     }
 
     /**
@@ -62,11 +87,11 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
         Set<Object> keySet = groupingMap.keySet();
         for (Object key : keySet) {
             // Ant表达式 = roles[xxx]
-            Matcher rolesMatcher = getRoleMatcher(http, groupingMap, key);
+            getRoleMatcher(http, groupingMap, key);
             //Ant表达式 = perms[xxx]
             getPermsMatcher(http, groupingMap, key);
             //Ant表达式 = ipaddr[192.168.1.0/24]
-            getIpAddrMatcher(http, groupingMap, key, rolesMatcher);
+            getIpAddrMatcher(http, groupingMap, key);
         }
         //禁用CSRF
         http.csrf().disable();
@@ -75,11 +100,10 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * Ant表达式 = ipaddr[192.168.1.0/24]
      */
-    private void getIpAddrMatcher(HttpSecurity http, Map<Object, List<Map.Entry<String, String>>> groupingMap, Object key, Matcher rolesMatcher) throws Exception {
+    private void getIpAddrMatcher(HttpSecurity http, Map<Object, List<Map.Entry<String, String>>> groupingMap, Object key) throws Exception {
         // Ant表达式 = ipaddr[192.168.1.0/24]
         Matcher ipMatcher = ipAddrPattern.matcher(key.toString());
-        if (rolesMatcher.find()) {
-
+        if (ipMatcher.find()) {
             String[] strings = groupingMap.get(key.toString()).stream().map(Map.Entry::getKey).toArray(String[]::new);
             // ipaddress
             String ipaddr = ipMatcher.group(1);
@@ -101,7 +125,7 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             List<String> antPatterns = groupingMap.get(key.toString()).stream().map(Map.Entry::getKey).collect(Collectors.toList());
             // 权限标记
-            String[] perms = StringUtils.split(permsMatcher.group(1), ",");
+            String[] perms = StrUtil.split(permsMatcher.group(1), ",");
             if (null != perms && perms.length > 0) {
                 if (perms.length > 1) {
                     // 如果用户具备给定全权限的某一个的话，就允许访问
@@ -119,7 +143,7 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * Ant表达式 = roles[xxx]
      */
-    private Matcher getRoleMatcher(HttpSecurity http, Map<Object, List<Map.Entry<String, String>>> groupingMap, Object key) throws Exception {
+    private void getRoleMatcher(HttpSecurity http, Map<Object, List<Map.Entry<String, String>>> groupingMap, Object key) throws Exception {
         // Ant表达式 = roles[xxx]
         Matcher rolesMatcher = rolesPattern.matcher(key.toString());
         if (rolesMatcher.find()) {
@@ -127,10 +151,14 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
             //获取所有的key,也就是路径
             List<String> antPatterns = groupingMap.get(key.toString()).stream().map(Map.Entry::getKey).collect(Collectors.toList());
             // 角色
-            String[] roles = StringUtils.split(rolesMatcher.group(1), ",");
+            String[] roles = StrUtil.split(rolesMatcher.group(1), ",");
             if (null != roles && roles.length > 0) {
                 if (roles.length > 1) {
-                    // 如果用户具备给定角色中的某一个的话，就允许访问
+                    /*
+                     * 如果用户具备给定角色中的某一个的话，就允许访问,
+                     * hasAnyRole处理的时候 默认会拼接 "ROLE_",比如role = ADMIN,
+                     * 那么 hasAnyRole("ADMIN") = hasAnyRole("ROLE_ADMIN")
+                     */
                     http.authorizeRequests().antMatchers(antPatterns.toArray(new String[0]))
                             .hasAnyRole(roles);
                 } else {
@@ -140,28 +168,5 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
                 }
             }
         }
-        return rolesMatcher;
-    }
-
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-
-        // 对过滤链按过滤器名称进行分组
-        Map<Object, List<Map.Entry<String, String>>> groupingMap = securityCasProperties.getFilterChainDefinitionMap().entrySet()
-                .stream().collect(Collectors.groupingBy(Map.Entry::getValue, TreeMap::new, Collectors.toList()));
-
-        //anon权限集合
-        List<Map.Entry<String, String>> noneEntries = groupingMap.get("anon");
-        List<String> permitMatchers = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(noneEntries)) {
-            for (Map.Entry<String, String> mapper : noneEntries) {
-                permitMatchers.add(mapper.getKey());
-            }
-        }
-        web.ignoring().antMatchers(permitMatchers.toArray(new String[0]))
-                .antMatchers(HttpMethod.OPTIONS, "/**");
-
-        super.configure(web);
     }
 }

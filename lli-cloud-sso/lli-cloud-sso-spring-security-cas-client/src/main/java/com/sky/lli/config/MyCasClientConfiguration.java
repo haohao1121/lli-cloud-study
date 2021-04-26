@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class MyCasClientConfiguration implements CasClientConfigurer {
 
     @Resource
-    private CasProperties casProperties;
+    private SecurityCasProperties casProperties;
 
     /**
      * Configure or customize CAS authentication filter.
