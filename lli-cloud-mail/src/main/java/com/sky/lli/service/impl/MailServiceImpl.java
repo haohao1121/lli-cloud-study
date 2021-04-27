@@ -1,6 +1,7 @@
 package com.sky.lli.service.impl;
 
 import cn.hutool.core.map.MapUtil;
+import com.sky.lli.config.MailConfigProperties;
 import com.sky.lli.exception.ExceptionEnum;
 import com.sky.lli.exception.MailExceptionEnum;
 import com.sky.lli.exception.ServiceException;
@@ -10,7 +11,6 @@ import com.sky.lli.model.mongo.MailMongoFile;
 import com.sky.lli.service.MailService;
 import com.sky.lli.util.FileDownloadUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -43,11 +43,8 @@ import java.util.Objects;
 @Transactional(rollbackFor = Exception.class)
 public class MailServiceImpl implements MailService {
 
-    /**
-     * 临时文件下载目录
-     */
-    @Value("${file.download.path}")
-    private String fileSavePath;
+    @Resource
+    private MailConfigProperties configProperties;
     @Resource
     private JavaMailSenderImpl mailSender;
     @Resource
@@ -123,7 +120,7 @@ public class MailServiceImpl implements MailService {
             if (MapUtil.isNotEmpty(mailVo.getAttachmentMap())) {
                 for (Map.Entry<String, String> entry : mailVo.getAttachmentMap().entrySet()) {
                     //先将文件下载到本地,然后添加到邮件里
-                    String filePath = FileDownloadUtil.downloadFile(entry.getValue(), fileSavePath);
+                    String filePath = FileDownloadUtil.downloadFile(entry.getValue(), configProperties.getTempFileDownloadPath());
                     FileSystemResource res = new FileSystemResource(new File(filePath));
                     messageHelper.addAttachment(MimeUtility.encodeWord(Objects.requireNonNull(res.getFilename())), res);
                 }
@@ -156,7 +153,7 @@ public class MailServiceImpl implements MailService {
         try {
             for (Map.Entry<String, String> entry : mailModel.getMailInLineMap().entrySet()) {
                 //如果是url文件,先将文件下载到本地,然后添加到邮件里
-                String filePath = FileDownloadUtil.downloadFile(entry.getValue(), fileSavePath);
+                String filePath = FileDownloadUtil.downloadFile(entry.getValue(), configProperties.getTempFileDownloadPath());
                 FileSystemResource res = new FileSystemResource(new File(filePath));
                 messageHelper.addInline(MimeUtility.encodeWord(Objects.requireNonNull(res.getFilename())), res);
             }
@@ -178,7 +175,7 @@ public class MailServiceImpl implements MailService {
         for (TemplateParam tm : mailModel.getTemplateParams()) {
             context.setVariable(tm.getPropertyName(), tm.getPropertyValue());
             if (tm.getPropertyType() == 1) {
-                String filePath = FileDownloadUtil.downloadFile(tm.getPropertyValue(), fileSavePath);
+                String filePath = FileDownloadUtil.downloadFile(tm.getPropertyValue(), configProperties.getTempFileDownloadPath());
                 context.setVariable(tm.getPropertyName(), filePath);
             }
 
