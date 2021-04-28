@@ -19,6 +19,7 @@
         <module>lli-cloud-sso-cas-client</module>
         <module>lli-cloud-sso-cas-auth</module>
         <module>lli-cloud-sso-spring-security-cas-client</module>
+        <module>lli-cloud-sso-spring-security-oauth2</module>
     </modules>
 
     <properties>
