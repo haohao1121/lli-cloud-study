@@ -1,4 +1,4 @@
-package com.sky.lli.config.mybatis;
+package com.sky.lli.mybatis;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;

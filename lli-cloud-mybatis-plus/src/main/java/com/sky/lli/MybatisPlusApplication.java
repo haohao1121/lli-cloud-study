@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication
-public class ShiroCasApplication {
+public class MybatisPlusApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ShiroCasApplication.class, args);
+        SpringApplication.run(MybatisPlusApplication.class, args);
     }
 }

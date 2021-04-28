@@ -1,6 +1,6 @@
 package com.sky.lli.dao.entity;
 
-import com.sky.lli.config.mybatis.BaseModel;
+import com.sky.lli.mybatis.BaseModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

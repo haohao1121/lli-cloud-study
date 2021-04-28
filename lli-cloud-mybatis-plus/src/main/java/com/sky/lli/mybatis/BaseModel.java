@@ -1,4 +1,4 @@
-package com.sky.lli.config.mybatis;
+package com.sky.lli.mybatis;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

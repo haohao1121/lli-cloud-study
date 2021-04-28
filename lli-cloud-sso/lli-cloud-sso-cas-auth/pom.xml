@@ -13,6 +13,7 @@
     <artifactId>lli-cloud-sso-cas-auth</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>lli-cloud-sso-cas-auth</name>
+    <description>Cas Login Rest Login</description>
 
     <dependencies>
         <!-- Spring Boot Web 依赖 -->

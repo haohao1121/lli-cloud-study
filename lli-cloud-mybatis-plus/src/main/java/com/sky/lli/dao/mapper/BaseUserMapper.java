@@ -1,7 +1,7 @@
 package com.sky.lli.dao.mapper;
 
-import com.sky.lli.dao.entity.BaseUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.sky.lli.dao.entity.BaseUser;
 
 /**
  * <p>

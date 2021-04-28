@@ -34,6 +34,7 @@
         <module>lli-cloud-alibaba</module>
         <module>lli-cloud-mail</module>
         <module>lli-cloud-rabbitmq</module>
+        <module>lli-cloud-mybatis-plus</module>
     </modules>
 
 

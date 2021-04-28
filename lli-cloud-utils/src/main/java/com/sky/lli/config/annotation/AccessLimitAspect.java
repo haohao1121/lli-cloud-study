@@ -1,8 +1,8 @@
 package com.sky.lli.config.annotation;
 
 import cn.hutool.core.net.NetUtil;
-import com.sky.lli.exception.ControllerException;
-import com.sky.lli.exception.ExceptionEnum;
+import com.sky.lli.utils.exception.ExceptionEnum;
+import com.sky.lli.utils.exception.UtilsException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -80,7 +80,7 @@ public class AccessLimitAspect {
                 return pjp.proceed();
             } else {
                 //否则抛出访问频繁异常
-                throw new ControllerException(ExceptionEnum.SYS_REQUEST_TOO_FREQUENT);
+                throw new UtilsException(ExceptionEnum.SYS_FAILURE_EXCEPTION);
             }
         }
     }
