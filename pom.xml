@@ -35,6 +35,8 @@
         <module>lli-cloud-mail</module>
         <module>lli-cloud-rabbitmq</module>
         <module>lli-cloud-mybatis-plus</module>
+        <module>lli-cloud-distributed-transaction</module>
+        <module>lli-cloud-gateway</module>
     </modules>
 
 
