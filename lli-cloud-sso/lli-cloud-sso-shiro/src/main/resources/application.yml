@@ -1,0 +1,13 @@
+server:
+  port: 7601
+
+spring:
+  application:
+    name: lli-shiro
+
+shiro:
+  filter-chain-definition-map:
+    '[/login]': anon
+    '[/hello]': roles[admin,guest,111]
+    '[/test]': perms[test,123]
+    '[/**]': authc
