@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020/12/03
  */
 
-@MapperScan({ "com.sky.lli.dao.mapper" })
+@MapperScan({"com.sky.lli.dao.mapper"})
 @Configuration
 public class MybatisPlusConfig {
 

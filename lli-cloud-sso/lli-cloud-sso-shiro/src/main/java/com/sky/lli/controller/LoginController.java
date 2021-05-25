@@ -41,7 +41,7 @@ public class LoginController {
             return "DisabledAccountException";
         } catch (IncorrectCredentialsException e) {
             return "IncorrectCredentialsException";
-        } catch (Throwable e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return e;
         }
