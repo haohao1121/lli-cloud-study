@@ -37,17 +37,19 @@ public class LocalDateConfig {
         ObjectMapper objectMapper = new ObjectMapper();
 
         JavaTimeModule javaTimeModule = new JavaTimeModule();
+
+        //localDate按照 "yyyy-MM-dd"的格式进行序列化、反序列化
         javaTimeModule.addDeserializer(LocalDate.class,
                 new LocalDateDeserializer(DateTimeFormatter.ofPattern(LOCAL_DATE)));
         javaTimeModule.addSerializer(LocalDate.class,
-                new LocalDateSerializer(DateTimeFormatter.ofPattern(LOCAL_DATE_TIME)));
-        //localDate按照 "yyyy-MM-dd"的格式进行序列化、反序列化
+                new LocalDateSerializer(DateTimeFormatter.ofPattern(LOCAL_DATE)));
 
+        //localDateTime按照 "yyyy-MM-dd HH:mm:ss"的格式进行序列化、反序列化
         javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(
                 DateTimeFormatter.ofPattern(LOCAL_DATE_TIME)));
         javaTimeModule.addSerializer(LocalDateTime.class,
                 new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(LOCAL_DATE_TIME)));
-        //localDateTime按照 "yyyy-MM-dd HH:mm:ss"的格式进行序列化、反序列化
+
 
         objectMapper.registerModule(javaTimeModule);
 
