@@ -1,9 +1,3 @@
-#==========自定义starter配置===========
-lli:
-  zookeeper:
-    addrs: vm-1.lli.com:2181
-#==========自定义starter配置===========
-
 # 端口
 server:
   port: 8020

@@ -78,14 +78,6 @@
         </dependency>
         <!--redisson-lock-->
 
-        <!--zookeeper-lock-->
-        <dependency>
-            <groupId>com.sky.lli</groupId>
-            <artifactId>lli-cloud-distributed-lock-zookeeper-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!--zookeeper-lock-->
-
     </dependencies>
 
     <build>

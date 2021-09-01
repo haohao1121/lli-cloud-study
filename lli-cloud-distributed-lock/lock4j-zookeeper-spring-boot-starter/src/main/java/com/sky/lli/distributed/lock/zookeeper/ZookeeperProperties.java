@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date 2020-12-01
  */
 @Data
-@ConfigurationProperties(prefix = "lli.zookeeper")
+@ConfigurationProperties(prefix = "lock4j-zookeeper")
 public class ZookeeperProperties {
 
     /**
@@ -32,5 +32,10 @@ public class ZookeeperProperties {
      * 连接超时时间
      */
     private int curatorConnectionTimeoutMs = 5000;
+
+    /**
+     * 根路径
+     */
+    private String baseLockPath = "zk-lock";
 
 }

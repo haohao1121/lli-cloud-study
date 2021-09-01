@@ -27,7 +27,6 @@
         <module>lli-cloud-consul-provide</module>
         <module>lli-cloud-consul-consume</module>
         <module>lli-cloud-admin</module>
-        <module>lli-cloud-distributed-lock-zookeeper-starter</module>
         <module>lli-cloud-sso</module>
         <module>lli-cloud-elk</module>
         <module>lli-cloud-skywalking</module>
@@ -37,6 +36,8 @@
         <module>lli-cloud-mybatis-plus</module>
         <module>lli-cloud-distributed-transaction</module>
         <module>lli-cloud-gateway</module>
+        <module>lli-cloud-distributed-lock</module>
+        <module>lli-cloud-spring-boot-starter</module>
     </modules>
 
 

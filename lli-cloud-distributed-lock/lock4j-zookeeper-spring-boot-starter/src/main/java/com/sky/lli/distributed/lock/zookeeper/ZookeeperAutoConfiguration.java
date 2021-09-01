@@ -49,7 +49,7 @@ public class ZookeeperAutoConfiguration {
 
     @Bean
     public ZookeeperDistributedLock zookeeperDistributedLock() {
-        return new ZookeeperDistributedLockImpl(curatorFramework());
+        return new ZookeeperDistributedLockImpl(curatorFramework(),zookeeperProperties);
     }
 
 }
