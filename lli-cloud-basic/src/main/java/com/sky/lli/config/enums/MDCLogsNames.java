@@ -64,5 +64,5 @@ public enum MDCLogsNames {
     /**
      * 名称
      */
-    private String mdczh;
+    private String mdcZh;
 }

@@ -65,9 +65,9 @@ public class LogAspectController {
         try {
             result = pjp.proceed();
         } catch (Throwable throwable) {
-            MDC.put(MDCLogsNames.REQUEST_RESULT_CODE.getMdczh(), "ERROR");
-            MDC.put(MDCLogsNames.REQUEST_RESULT_MESSAGE.getMdczh(), "抛出错误");
-            MDC.put(MDCLogsNames.COST_TIME.getMdczh(), String.valueOf(stopWatch.getTotalTimeMillis()));
+            MDC.put(MDCLogsNames.REQUEST_RESULT_CODE.getMdcZh(), "ERROR");
+            MDC.put(MDCLogsNames.REQUEST_RESULT_MESSAGE.getMdcZh(), "抛出错误");
+            MDC.put(MDCLogsNames.COST_TIME.getMdcZh(), String.valueOf(stopWatch.getTotalTimeMillis()));
             log.error("记录日志:{}", JsonUtils.toJson(mdcParam));
             MDC.clear();
             throw throwable;
@@ -92,9 +92,9 @@ public class LogAspectController {
      * @param result    返回信息
      */
     private void markSuccess(StopWatch stopWatch, ResponseResult result) {
-        MDC.put(MDCLogsNames.REQUEST_RESULT_CODE.getMdczh(), result.getCode());
-        MDC.put(MDCLogsNames.REQUEST_RESULT_MESSAGE.getMdczh(), result.getMessage());
-        MDC.put(MDCLogsNames.COST_TIME.getMdczh(), String.valueOf(stopWatch.getTotalTimeMillis()));
+        MDC.put(MDCLogsNames.REQUEST_RESULT_CODE.getMdcZh(), result.getCode());
+        MDC.put(MDCLogsNames.REQUEST_RESULT_MESSAGE.getMdcZh(), result.getMessage());
+        MDC.put(MDCLogsNames.COST_TIME.getMdcZh(), String.valueOf(stopWatch.getTotalTimeMillis()));
     }
 
     /**
@@ -106,31 +106,31 @@ public class LogAspectController {
     private HashMap<String, String> getMdcInitMap(ProceedingJoinPoint pjp) {
         HashMap<String, String> mdcParam = new HashMap<>(16);
         // 1.本次请求的UUID
-        mdcParam.put(MDCLogsNames.REQUEST_UUID.getMdczh(), IdUtil.fastSimpleUUID());
+        mdcParam.put(MDCLogsNames.REQUEST_UUID.getMdcZh(), IdUtil.fastSimpleUUID());
         // 2.controller的方法名称
-        mdcParam.put(MDCLogsNames.CONTROLLER_METHOD_NAME.getMdczh(),
+        mdcParam.put(MDCLogsNames.CONTROLLER_METHOD_NAME.getMdcZh(),
                 pjp.getSignature().getDeclaringTypeName() + "." + pjp.getSignature().getName());
         // 3.获取请求参数列表
         Object[] args = pjp.getArgs();
         if (args != null && args.length > 0) {
-            mdcParam.put(MDCLogsNames.REQUEST_PARAM.getMdczh(), Arrays.toString(args));
+            mdcParam.put(MDCLogsNames.REQUEST_PARAM.getMdcZh(), Arrays.toString(args));
         }
         // 4.获取Token
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert attributes != null;
         HttpServletRequest request = attributes.getRequest();
         if (!isNull(request.getHeader(TOKEN))) {
-            mdcParam.put(MDCLogsNames.REQUEST_TOKEN.getMdczh(), request.getHeader(TOKEN));
+            mdcParam.put(MDCLogsNames.REQUEST_TOKEN.getMdcZh(), request.getHeader(TOKEN));
         }
         if (!isNull(request.getHeader(MDC_TAG))) {
-            mdcParam.put(MDCLogsNames.REQUEST_UUID.getMdczh(), request.getHeader(MDC_TAG));
+            mdcParam.put(MDCLogsNames.REQUEST_UUID.getMdcZh(), request.getHeader(MDC_TAG));
         }
         HttpServletResponse response = Objects.requireNonNull((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         assert response != null;
         // 返回MDC唯一标识,便于问题排查
-        response.setHeader(MDC_TAG, mdcParam.get(MDCLogsNames.REQUEST_UUID.getMdczh()));
+        response.setHeader(MDC_TAG, mdcParam.get(MDCLogsNames.REQUEST_UUID.getMdcZh()));
         // 5.获取请求路径
-        mdcParam.put(MDCLogsNames.REQUEST_URL.getMdczh(), request.getRequestURL().toString());
+        mdcParam.put(MDCLogsNames.REQUEST_URL.getMdcZh(), request.getRequestURL().toString());
         return mdcParam;
     }
 }
