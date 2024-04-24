@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
 
 /**
  * 使用FastJSON作为json转换
@@ -17,7 +16,7 @@ import org.springframework.http.converter.HttpMessageConverter;
  * @date 2020-01-05
  */
 @Configuration
-@ConditionalOnClass({ JSON.class })
+@ConditionalOnClass({JSON.class})
 public class FastJsonHttpMessageConvertersConfig {
     /**
      * JSON转换器
@@ -27,10 +26,10 @@ public class FastJsonHttpMessageConvertersConfig {
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue,
-                                             SerializerFeature.WriteNullStringAsEmpty,
-                                             SerializerFeature.WriteNullListAsEmpty,
-                                             SerializerFeature.DisableCircularReferenceDetect);
+                SerializerFeature.WriteNullStringAsEmpty,
+                SerializerFeature.WriteNullListAsEmpty,
+                SerializerFeature.DisableCircularReferenceDetect);
         fastConverter.setFastJsonConfig(fastJsonConfig);
-        return new HttpMessageConverters((HttpMessageConverter<?>) fastConverter);
+        return new HttpMessageConverters(fastConverter);
     }
 }
